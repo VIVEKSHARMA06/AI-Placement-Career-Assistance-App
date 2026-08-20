@@ -1,10 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv");
 
 const connectDB = require("./src/config/db");
-
-dotenv.config();
+const authRoutes = require("./src/routes/authRoutes");
+const errorHandler = require("./src/middleware/errorHandler");
 
 const app = express();
 
@@ -17,6 +16,17 @@ app.get("/", (req, res) => {
         message: "Placement Assistant API is running",
     });
 });
+
+app.use("/api/auth", authRoutes);
+
+app.use((req, _res, next) => {
+    const error = new Error("Route not found.");
+    error.statusCode = 404;
+    error.isPublic = true;
+    next(error);
+});
+
+app.use(errorHandler);
 
 connectDB();
 
