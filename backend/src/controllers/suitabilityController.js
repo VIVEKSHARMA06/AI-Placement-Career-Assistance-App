@@ -1,4 +1,4 @@
-const Resume = require("../models/Resume");
+// const Resume = require("../models/Resume");
 const PredictionResult = require("../models/PredictionResult");
 
 const { predictSuitability } = require("../services/pythonClient");

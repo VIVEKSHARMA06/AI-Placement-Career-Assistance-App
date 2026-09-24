@@ -12,6 +12,8 @@ const connectDB = require("./src/config/db");
 const atsRoutes = require("./src/routes/atsRoutes");
 const recommendationRoutes = require("./src/routes/recommendationRoutes");
 const suitabilityRoutes = require("./src/routes/suitabilityRoutes");
+const authRoutes = require("./src/routes/authRoutes");
+const errorHandler = require("./src/middleware/errorHandler");
 
 const app = express();
 
@@ -37,6 +39,8 @@ app.get("/", (req, res) => {
 // ATS Analysis
 app.use("/api/ats", atsRoutes);
 
+
+
 // Job + Education Recommendations
 app.use("/api/recommendations", recommendationRoutes);
 
@@ -47,6 +51,17 @@ app.use("/api/suitability", suitabilityRoutes);
 // =================================
 // DATABASE CONNECTION
 // =================================
+app.use("/api/auth", authRoutes);
+
+app.use((req, _res, next) => {
+    const error = new Error("Route not found.");
+    error.statusCode = 404;
+    error.isPublic = true;
+    next(error);
+});
+
+app.use(errorHandler);
+
 connectDB();
 
 const PORT = process.env.PORT || 5001;

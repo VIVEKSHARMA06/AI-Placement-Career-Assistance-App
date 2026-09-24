@@ -1,4 +1,4 @@
-const Resume = require("../models/Resume");
+// const Resume = require("../models/Resume");
 const { analyzeResume } = require("@pranavraut033/ats-checker");
 
 // POST /api/ats/check
