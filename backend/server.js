@@ -3,6 +3,7 @@ const cors = require("cors");
 
 const connectDB = require("./src/config/db");
 const authRoutes = require("./src/routes/authRoutes");
+const resumeRoutes = require("./src/routes/resumeRoutes");
 const errorHandler = require("./src/middleware/errorHandler");
 
 const app = express();
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/resume", resumeRoutes);
 
 app.use((req, _res, next) => {
     const error = new Error("Route not found.");

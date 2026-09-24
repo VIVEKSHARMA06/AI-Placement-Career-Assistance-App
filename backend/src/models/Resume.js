@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 
 const FILE_NAME_MAX_LENGTH = 255;
-const FILE_URL_MAX_LENGTH = 2048;
-const PUBLIC_ID_MAX_LENGTH = 512;
 const EXTRACTED_TEXT_MAX_LENGTH = 500000;
 
 const resumeSchema = new mongoose.Schema(
@@ -21,24 +19,6 @@ const resumeSchema = new mongoose.Schema(
             maxlength: [
                 FILE_NAME_MAX_LENGTH,
                 `Resume file name must not exceed ${FILE_NAME_MAX_LENGTH} characters.`,
-            ],
-        },
-        fileUrl: {
-            type: String,
-            required: [true, "Resume file URL is required."],
-            trim: true,
-            maxlength: [
-                FILE_URL_MAX_LENGTH,
-                `Resume file URL must not exceed ${FILE_URL_MAX_LENGTH} characters.`,
-            ],
-        },
-        publicId: {
-            type: String,
-            required: [true, "Resume storage identifier is required."],
-            trim: true,
-            maxlength: [
-                PUBLIC_ID_MAX_LENGTH,
-                `Resume storage identifier must not exceed ${PUBLIC_ID_MAX_LENGTH} characters.`,
             ],
         },
         extractedText: {
