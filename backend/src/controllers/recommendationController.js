@@ -1,4 +1,4 @@
-// const Resume = require("../models/Resume");
+const Resume = require("../models/Resume");
 const { recommendJobs, recommendEducation } = require("../services/pythonClient");
 
 
@@ -20,7 +20,7 @@ const getJobRecommendations = async (req, res) => {
         // 2. Find resume and verify ownership
         const resume = await Resume.findOne({
             _id: resumeId,
-            userId: req.user.id,
+            user: req.user.id,
         });
 
         if (!resume) {
@@ -30,9 +30,8 @@ const getJobRecommendations = async (req, res) => {
             });
         }
 
-        // 3. Get standardized English resume text
-        const resumeText = resume.englishText || resume.originalText;
-
+        // 3. Get extracted resume text
+        const resumeText = resume.extractedText;
         if (!resumeText || !resumeText.trim()) {
             return res.status(400).json({
                 success: false,
@@ -82,7 +81,7 @@ const getEducationRecommendations = async (req, res) => {
         // 2. Find resume and verify ownership
         const resume = await Resume.findOne({
             _id: resumeId,
-            userId: req.user.id,
+            user: req.user.id,
         });
 
         if (!resume) {
@@ -93,7 +92,7 @@ const getEducationRecommendations = async (req, res) => {
         }
 
         // 3. Get standardized English resume text
-        const resumeText = resume.englishText || resume.originalText;
+        const resumeText = resume.extractedText;
 
         if (!resumeText || !resumeText.trim()) {
             return res.status(400).json({

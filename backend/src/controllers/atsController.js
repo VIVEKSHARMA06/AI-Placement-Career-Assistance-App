@@ -1,8 +1,16 @@
-// const Resume = require("../models/Resume");
+const Resume = require("../models/Resume");
+const mongoose = require("mongoose");
 const { analyzeResume } = require("@pranavraut033/ats-checker");
 
+const createError = (message, statusCode) => {
+    const error = new Error(message);
+    error.statusCode = statusCode;
+    error.isPublic = true;
+    return error;
+};
+
 // POST /api/ats/check
-const checkATS = async (req, res) => {
+const checkATS = async (req, res, next) => {
     try {
         const { resumeId, jobDescription } = req.body;
 
@@ -12,6 +20,10 @@ const checkATS = async (req, res) => {
                 success: false,
                 message: "resumeId and jobDescription are required",
             });
+        }
+
+        if (!mongoose.isValidObjectId(resumeId)) {
+            throw createError("resumeId must be a valid MongoDB ObjectId.", 400);
         }
 
         // 2. Validate job description
@@ -25,7 +37,7 @@ const checkATS = async (req, res) => {
         // 3. Find only the logged-in user's resume
         const resume = await Resume.findOne({
             _id: resumeId,
-            userId: req.user.id,
+            user: req.user.id,
         });
 
         if (!resume) {
@@ -36,7 +48,7 @@ const checkATS = async (req, res) => {
         }
 
         // 4. Prefer translated/standardized English text
-        const resumeText = resume.englishText || resume.originalText;
+        const resumeText = resume.extractedText;
 
         if (!resumeText || !resumeText.trim()) {
             return res.status(400).json({
@@ -78,12 +90,8 @@ const checkATS = async (req, res) => {
             warnings: result.warnings || [],
         });
     } catch (error) {
-        console.error("ATS analysis error:", error);
-
-        return res.status(500).json({
-            success: false,
-            message: "Unable to perform ATS analysis",
-        });
+        console.error("ATS analysis error:", error.message);
+        return next(error);
     }
 };
 

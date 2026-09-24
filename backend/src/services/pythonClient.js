@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const PYTHON_API_URL =
-    process.env.PYTHON_API_URL || "http://localhost:8000";
+    process.env.PYTHON_SERVICE_URL || "http://localhost:8000";
 
 // Create axios client for Python/FastAPI service
 const pythonAPI = axios.create({

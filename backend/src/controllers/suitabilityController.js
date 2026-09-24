@@ -1,4 +1,4 @@
-// const Resume = require("../models/Resume");
+const Resume = require("../models/Resume");
 const PredictionResult = require("../models/PredictionResult");
 
 const { predictSuitability } = require("../services/pythonClient");
@@ -19,7 +19,7 @@ const predictCandidateSuitability = async (req, res) => {
         // 2. Find resume and verify ownership
         const resume = await Resume.findOne({
             _id: resumeId,
-            userId: req.user.id,
+            user: req.user.id,
         });
 
         if (!resume) {
@@ -31,7 +31,7 @@ const predictCandidateSuitability = async (req, res) => {
 
         // 3. Get candidate profile
         // Later, this profile will be created from the parsed resume
-        const candidateProfile = resume.candidateProfile;
+        const candidateProfile = req.body.candidateProfile;
 
         if (!candidateProfile) {
             return res.status(400).json({

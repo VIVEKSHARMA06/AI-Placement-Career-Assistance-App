@@ -1,4 +1,5 @@
 const Resume = require("../models/Resume");
+const { extractTextFromPDF } = require("../services/pdfExtractor");
 
 const createError = (message, statusCode, isPublic = true) => {
     const error = new Error(message);
@@ -35,10 +36,11 @@ const uploadResume = async (req, res, next) => {
             throw createError("Resume file is required.", 400);
         }
 
+        const extractedText = await extractTextFromPDF(req.file.buffer);
         const resume = await Resume.create({
             user: userId,
             fileName: getUploadedFileName(req.file),
-            extractedText: "",
+            extractedText,
         });
 
         return res.status(201).json({
