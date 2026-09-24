@@ -13,6 +13,7 @@ const atsRoutes = require("./src/routes/atsRoutes");
 const recommendationRoutes = require("./src/routes/recommendationRoutes");
 const suitabilityRoutes = require("./src/routes/suitabilityRoutes");
 const authRoutes = require("./src/routes/authRoutes");
+const resumeRoutes = require("./src/routes/resumeRoutes");
 const errorHandler = require("./src/middleware/errorHandler");
 
 const app = express();
@@ -52,6 +53,7 @@ app.use("/api/suitability", suitabilityRoutes);
 // DATABASE CONNECTION
 // =================================
 app.use("/api/auth", authRoutes);
+app.use("/api/resume", resumeRoutes);
 
 app.use((req, _res, next) => {
     const error = new Error("Route not found.");
