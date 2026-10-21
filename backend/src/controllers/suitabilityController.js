@@ -1,22 +1,35 @@
+
 const Resume = require("../models/Resume");
 const PredictionResult = require("../models/PredictionResult");
 
 const { predictSuitability } = require("../services/pythonClient");
 
-// POST /api/suitability/predict
 const predictCandidateSuitability = async (req, res) => {
     try {
-        const { resumeId, jobDescriptionId } = req.body;
+        const body = req.body || {};
+        const { resumeId } = body;
 
-        // 1. Validate required fields
-        if (!resumeId || !jobDescriptionId) {
+        if (!resumeId) {
             return res.status(400).json({
                 success: false,
-                message: "resumeId and jobDescriptionId are required",
+                message: "Resume ID is required.",
             });
         }
 
-        // 2. Find resume and verify ownership
+        const jobDescription =
+            typeof body.jobDescription === "string"
+                ? body.jobDescription.trim()
+                : "";
+
+        const jobDescriptionFile = req.file || null;
+
+        if (!jobDescription && !jobDescriptionFile) {
+            return res.status(400).json({
+                success: false,
+                message: "Paste a job description or upload a PDF/TXT file.",
+            });
+        }
+
         const resume = await Resume.findOne({
             _id: resumeId,
             user: req.user.id,
@@ -25,82 +38,88 @@ const predictCandidateSuitability = async (req, res) => {
         if (!resume) {
             return res.status(404).json({
                 success: false,
-                message: "Resume not found",
+                message: "Resume not found.",
             });
         }
 
-        // 3. Get candidate profile
-        // Later, this profile will be created from the parsed resume
-        const candidateProfile = req.body.candidateProfile;
+        let candidateProfile = body.candidateProfile;
 
-        if (!candidateProfile) {
+        if (typeof candidateProfile === "string") {
+            try {
+                candidateProfile = JSON.parse(candidateProfile);
+            } catch {
+                return res.status(400).json({
+                    success: false,
+                    message: "Invalid candidate profile format.",
+                });
+            }
+        }
+
+        if (
+            !candidateProfile ||
+            typeof candidateProfile !== "object" ||
+            Array.isArray(candidateProfile)
+        ) {
             return res.status(400).json({
                 success: false,
-                message: "Candidate profile is not available for suitability prediction",
+                message: "Candidate profile is missing or invalid.",
             });
         }
 
-        // 4. Send data to Python FastAPI service
+        // The existing Python service must support this new request format.
         const pythonResponse = await predictSuitability({
             resumeId: resume._id.toString(),
-            jobDescriptionId,
+            jobDescription,
+            jobDescriptionFile: jobDescriptionFile
+                ? {
+                    originalName: jobDescriptionFile.originalname,
+                    mimeType: jobDescriptionFile.mimetype,
+                    buffer: jobDescriptionFile.buffer,
+                }
+                : null,
             candidateProfile,
         });
 
-        // Standard Python response:
-        // {
-        //   status: "success",
-        //   code: 200,
-        //   data: { ... }
-        // }
+        const result = pythonResponse?.data;
 
-        const result = pythonResponse.data;
-
-        // 5. Validate Python response
         if (
+            !result ||
             typeof result.suitabilityScore !== "number" ||
             !result.predictionLabel
         ) {
             return res.status(502).json({
                 success: false,
-                message: "Invalid response received from AI service",
+                message: "Invalid response received from AI service.",
             });
         }
 
-        // 6. Save prediction result in MongoDB
         const predictionResult = await PredictionResult.create({
             userId: req.user.id,
             resumeId: resume._id,
-            jobDescriptionId,
-
+            jobDescription,
             suitabilityScore: result.suitabilityScore,
             predictionLabel: result.predictionLabel,
-
             limeExplanation: result.limeExplanation || [],
-
             geminiSuggestions: result.geminiSuggestions || [],
         });
 
-        // 7. Return final response
         return res.status(200).json({
             success: true,
-
             suitabilityScore: result.suitabilityScore,
-
             predictionLabel: result.predictionLabel,
-
             limeExplanation: result.limeExplanation || [],
-
             geminiSuggestions: result.geminiSuggestions || [],
-
             predictionId: predictionResult._id,
         });
     } catch (error) {
-        console.error("Suitability prediction error:", error.message);
+        console.error("Suitability prediction error:", error);
 
-        return res.status(500).json({
+        return res.status(error.statusCode || 500).json({
             success: false,
-            message: "Unable to predict candidate suitability",
+            message:
+                error.isPublic && error.message
+                    ? error.message
+                    : "Unable to predict candidate suitability.",
         });
     }
 };

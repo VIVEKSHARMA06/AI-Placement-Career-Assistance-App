@@ -29,7 +29,25 @@ const extractTextFromPDF = async (data) => {
             }))
             .sort((left, right) => right.y - left.y || left.x - right.x);
 
-        pages.push(items.map((item) => item.text).join(" "));
+        const lines = [];
+        let currentLine = [];
+        let currentY = null;
+
+        for (const item of items) {
+            if (currentY !== null && Math.abs(item.y - currentY) > 3) {
+                lines.push(currentLine.join(" "));
+                currentLine = [];
+            }
+
+            currentLine.push(item.text);
+            currentY = item.y;
+        }
+
+        if (currentLine.length) {
+            lines.push(currentLine.join(" "));
+        }
+
+        pages.push(lines.join("\n"));
     }
 
     return pages.join("\n").trim();

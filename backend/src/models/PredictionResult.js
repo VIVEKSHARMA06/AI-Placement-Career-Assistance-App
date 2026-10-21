@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 
 const predictionResultSchema = new mongoose.Schema(
@@ -14,10 +15,18 @@ const predictionResultSchema = new mongoose.Schema(
             required: [true, "Resume ID is required"],
         },
 
+        // Optional for backward compatibility with existing records.
         jobDescriptionId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "JobDescription",
-            required: [true, "Job description ID is required"],
+            required: false,
+        },
+
+        // Store the JD text used for this prediction.
+        jobDescription: {
+            type: String,
+            trim: true,
+            default: "",
         },
 
         suitabilityScore: {
@@ -40,12 +49,10 @@ const predictionResultSchema = new mongoose.Schema(
                         type: String,
                         required: true,
                     },
-
                     weight: {
                         type: Number,
                         required: true,
                     },
-
                     impact: {
                         type: String,
                         enum: ["positive", "negative"],

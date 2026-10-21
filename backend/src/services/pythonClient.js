@@ -1,3 +1,4 @@
+
 const axios = require("axios");
 
 const PYTHON_API_URL =
@@ -16,7 +17,6 @@ const pythonAPI = axios.create({
 const callPythonAPI = async (endpoint, data) => {
     try {
         const response = await pythonAPI.post(endpoint, data);
-
         return response.data;
     } catch (error) {
         console.error(
@@ -33,7 +33,6 @@ const callPythonAPI = async (endpoint, data) => {
     }
 };
 
-
 // ==========================================
 // JOB RECOMMENDATION
 // ==========================================
@@ -43,7 +42,6 @@ const recommendJobs = async ({ resumeId, resumeText }) => {
         resumeText,
     });
 };
-
 
 // ==========================================
 // EDUCATION RECOMMENDATION
@@ -55,22 +53,33 @@ const recommendEducation = async ({ resumeId, resumeText }) => {
     });
 };
 
-
 // ==========================================
 // CANDIDATE SUITABILITY PREDICTION
 // ==========================================
 const predictSuitability = async ({
     resumeId,
-    jobDescriptionId,
+    jobDescription,
+    jobDescriptionFile,
     candidateProfile,
 }) => {
-    return await callPythonAPI("/suitability/predict", {
+    const payload = {
         resumeId,
-        jobDescriptionId,
+        jobDescription,
         candidateProfile,
-    });
-};
+    };
 
+    // Forward file metadata and Base64 content if a file was uploaded.
+    // The Python API must implement support for this field.
+    if (jobDescriptionFile) {
+        payload.jobDescriptionFile = {
+            originalName: jobDescriptionFile.originalName,
+            mimeType: jobDescriptionFile.mimeType,
+            contentBase64: jobDescriptionFile.buffer.toString("base64"),
+        };
+    }
+
+    return await callPythonAPI("/suitability/predict", payload);
+};
 
 module.exports = {
     recommendJobs,
