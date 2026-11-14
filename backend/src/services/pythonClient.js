@@ -13,6 +13,16 @@ const pythonAPI = axios.create({
     },
 });
 
+const redactResumeErrorDetail = (detail, resumeText) => {
+    let safeDetail =
+        typeof detail === "string" ? detail : JSON.stringify(detail ?? "");
+    if (resumeText) safeDetail = safeDetail.split(resumeText).join("[resume text redacted]");
+    for (const secret of [process.env.GEMINI_API_KEY, process.env.AZURE_TRANSLATOR_KEY]) {
+        if (secret) safeDetail = safeDetail.split(secret).join("[secret redacted]");
+    }
+    return safeDetail || "No error detail returned";
+};
+
 // Generic function to handle Python API requests
 const callPythonAPI = async (endpoint, data) => {
     try {
@@ -109,7 +119,42 @@ const processResume = async ({ resumeId, resumeText }) => {
     }
 };
 
+const extractResumeProfile = async ({ resumeId, resumeText }) => {
+    try {
+        const response = await pythonAPI.post(
+            "/resume/extract",
+            { resumeId, resumeText },
+            { timeout: 180000 },
+        );
+        return response.data;
+    } catch (error) {
+        const statusCode = error.response?.status;
+        const detail = redactResumeErrorDetail(
+            error.response?.data?.detail ??
+                error.response?.data?.message ??
+                error.message,
+            resumeText,
+        );
+        console.error(
+            `Resume extraction failed (HTTP ${statusCode ?? "network error"}): ${detail}`,
+        );
+        const safeError = new Error(
+            statusCode === 503
+                ? "Resume extraction service (Gemini) is not configured."
+                : statusCode === 502
+                    ? "Resume extraction failed. Please try again."
+                    : statusCode
+                        ? `Resume extraction failed (AI service HTTP ${statusCode}).`
+                        : "Resume extraction service could not be reached.",
+        );
+        safeError.statusCode = statusCode === 503 ? 503 : 502;
+        safeError.isPublic = true;
+        throw safeError;
+    }
+};
+
 module.exports = {
+    extractResumeProfile,
     processResume,
     recommendJobs,
     recommendEducation,

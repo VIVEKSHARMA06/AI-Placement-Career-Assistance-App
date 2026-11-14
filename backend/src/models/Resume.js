@@ -46,6 +46,10 @@ const resumeSchema = new mongoose.Schema(
         translationApplied: {
             type: Boolean,
         },
+        structuredProfile: {
+            type: mongoose.Schema.Types.Mixed,
+            default: null,
+        },
     },
     {
         timestamps: true,

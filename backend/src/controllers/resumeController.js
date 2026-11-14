@@ -1,6 +1,7 @@
 const Resume = require("../models/Resume");
 const { extractTextFromPDF } = require("../services/pdfExtractor");
 const { getEnglishResumeText } = require("../services/resumeTextService");
+const { extractResumeProfile } = require("../services/pythonClient");
 
 const createError = (message, statusCode, isPublic = true) => {
     const error = new Error(message);
@@ -45,6 +46,26 @@ const uploadResume = async (req, res, next) => {
         });
 
         await getEnglishResumeText(resume);
+
+        // Extract from translated English text for every source language.
+        try {
+            const englishText = resume.translatedText;
+            if (englishText && englishText.trim()) {
+                const extraction = await extractResumeProfile({
+                    resumeId: resume._id.toString(),
+                    resumeText: englishText,
+                });
+                if (extraction && extraction.profile) {
+                    resume.structuredProfile = extraction.profile;
+                }
+            }
+        } catch (extractionError) {
+            // Keep uploads available, but make failures visible in the Node terminal.
+            console.error(
+                `Resume profile extraction failed for resume ${resume._id}: ${extractionError.message}`,
+            );
+        }
+
         await resume.save();
 
         return res.status(201).json({

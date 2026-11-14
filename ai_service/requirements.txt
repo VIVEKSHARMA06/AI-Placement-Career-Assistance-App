@@ -3,3 +3,7 @@ uvicorn[standard]
 pydantic-settings
 langdetect
 httpx
+google-genai
+sentence-transformers
+numpy
+scikit-learn

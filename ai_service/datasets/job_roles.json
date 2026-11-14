@@ -1,0 +1,677 @@
+[
+  {
+    "roleId": "SE001",
+    "title": "Software Engineering Intern",
+    "category": "Software Engineering",
+    "experienceLevel": "Intern",
+    "description": "Assist senior engineers in building and maintaining software applications. Work on real features, write unit tests, and participate in code reviews under mentorship.",
+    "requiredSkills": ["Python", "Data Structures", "Algorithms", "Git"],
+    "preferredSkills": ["REST APIs", "Linux", "SQL"]
+  },
+  {
+    "roleId": "SE002",
+    "title": "Junior Software Engineer",
+    "category": "Software Engineering",
+    "experienceLevel": "Junior",
+    "description": "Develop and maintain software features with guidance from senior developers. Expected to debug issues independently and contribute to Agile sprint cycles.",
+    "requiredSkills": ["Java", "Data Structures", "Algorithms", "Git", "SQL"],
+    "preferredSkills": ["Spring Boot", "JUnit", "REST APIs"]
+  },
+  {
+    "roleId": "SE003",
+    "title": "Software Engineer",
+    "category": "Software Engineering",
+    "experienceLevel": "Mid",
+    "description": "Design, develop, and ship production-grade software features. Collaborate cross-functionally with product and QA teams to deliver high-quality, well-tested code.",
+    "requiredSkills": ["Python", "Data Structures", "Algorithms", "Git", "REST APIs", "SQL"],
+    "preferredSkills": ["Docker", "CI/CD", "Redis"]
+  },
+  {
+    "roleId": "SE004",
+    "title": "Senior Software Engineer",
+    "category": "Software Engineering",
+    "experienceLevel": "Senior",
+    "description": "Lead technical design for complex features, mentor junior engineers, and drive best practices across the engineering team. Own end-to-end delivery of critical system components.",
+    "requiredSkills": ["System Design", "Java", "Microservices", "SQL", "Git", "REST APIs"],
+    "preferredSkills": ["Kafka", "Kubernetes", "gRPC", "Redis"]
+  },
+  {
+    "roleId": "SE005",
+    "title": "Staff Software Engineer",
+    "category": "Software Engineering",
+    "experienceLevel": "Staff",
+    "description": "Define architectural direction across multiple product teams and serve as the technical lead for high-impact initiatives. Drive engineering culture and cross-team technical strategy.",
+    "requiredSkills": ["System Design", "Distributed Systems", "Microservices", "Leadership", "Python", "Java"],
+    "preferredSkills": ["Apache Kafka", "gRPC", "Terraform", "OpenTelemetry"]
+  },
+  {
+    "roleId": "SE006",
+    "title": "Mobile Developer (iOS)",
+    "category": "Software Engineering",
+    "experienceLevel": "Mid",
+    "description": "Build and maintain native iOS applications using Swift and SwiftUI. Collaborate with designers to create performant, accessible, and delightful mobile experiences.",
+    "requiredSkills": ["Swift", "SwiftUI", "Xcode", "UIKit", "Git"],
+    "preferredSkills": ["Combine", "CoreData", "Firebase", "TestFlight"]
+  },
+  {
+    "roleId": "SE007",
+    "title": "Embedded Systems Engineer",
+    "category": "Software Engineering",
+    "experienceLevel": "Mid",
+    "description": "Develop low-level firmware and embedded software for microcontroller-based products. Optimize code for resource-constrained environments and perform hardware-software integration testing.",
+    "requiredSkills": ["C", "C++", "RTOS", "Microcontrollers", "JTAG Debugging"],
+    "preferredSkills": ["FreeRTOS", "CAN Bus", "ARM Cortex", "Python"]
+  },
+  {
+    "roleId": "SE008",
+    "title": "Game Developer",
+    "category": "Software Engineering",
+    "experienceLevel": "Mid",
+    "description": "Design and implement gameplay systems, physics, and rendering pipelines using Unity or Unreal Engine. Work with artists and designers to build immersive interactive experiences.",
+    "requiredSkills": ["C#", "Unity", "Linear Algebra", "Git", "Game Physics"],
+    "preferredSkills": ["Unreal Engine", "HLSL", "Shader Programming", "Multiplayer Networking"]
+  },
+  {
+    "roleId": "SE009",
+    "title": "Firmware Engineer",
+    "category": "Software Engineering",
+    "experienceLevel": "Mid",
+    "description": "Write, test, and maintain firmware for hardware products including IoT devices and consumer electronics. Coordinate closely with hardware engineers during bring-up and validation phases.",
+    "requiredSkills": ["C", "Embedded C", "I2C", "SPI", "UART", "Git"],
+    "preferredSkills": ["Zephyr RTOS", "Bluetooth LE", "Python scripting", "Linux kernel modules"]
+  },
+  {
+    "roleId": "SE010",
+    "title": "Platform Engineer",
+    "category": "Software Engineering",
+    "experienceLevel": "Senior",
+    "description": "Build and maintain internal developer platforms, tooling, and frameworks that improve engineering productivity. Define standards for how services are built, deployed, and monitored.",
+    "requiredSkills": ["Go", "Kubernetes", "Docker", "CI/CD", "Terraform", "Linux"],
+    "preferredSkills": ["Helm", "ArgoCD", "Prometheus", "Grafana"]
+  },
+  {
+    "roleId": "FS001",
+    "title": "React Frontend Developer",
+    "category": "Full-Stack / Frontend / Backend",
+    "experienceLevel": "Mid",
+    "description": "Develop responsive, accessible web applications using React and its ecosystem. Translate Figma designs into pixel-perfect, performant UI components.",
+    "requiredSkills": ["React", "JavaScript", "TypeScript", "HTML5", "CSS3", "Git"],
+    "preferredSkills": ["Redux", "React Query", "Vite", "Storybook"]
+  },
+  {
+    "roleId": "FS002",
+    "title": "Angular Frontend Developer",
+    "category": "Full-Stack / Frontend / Backend",
+    "experienceLevel": "Mid",
+    "description": "Build enterprise-grade single-page applications using Angular and RxJS. Implement complex state management, routing, and integration with RESTful and GraphQL APIs.",
+    "requiredSkills": ["Angular", "TypeScript", "RxJS", "HTML5", "SCSS", "Git"],
+    "preferredSkills": ["NgRx", "Angular Material", "Jest", "Cypress"]
+  },
+  {
+    "roleId": "FS003",
+    "title": "Vue.js Frontend Developer",
+    "category": "Full-Stack / Frontend / Backend",
+    "experienceLevel": "Junior",
+    "description": "Build dynamic user interfaces using Vue 3 and the Composition API. Collaborate with backend teams to integrate APIs and ensure smooth user experiences.",
+    "requiredSkills": ["Vue.js", "JavaScript", "HTML5", "CSS3", "Git", "REST APIs"],
+    "preferredSkills": ["Pinia", "Vuetify", "Vite", "Vitest"]
+  },
+  {
+    "roleId": "FS004",
+    "title": "Node.js Backend Developer",
+    "category": "Full-Stack / Frontend / Backend",
+    "experienceLevel": "Mid",
+    "description": "Design and build scalable REST and GraphQL APIs using Node.js and Express. Own the backend services that power both web and mobile client applications.",
+    "requiredSkills": ["Node.js", "Express.js", "JavaScript", "MongoDB", "SQL", "REST APIs"],
+    "preferredSkills": ["GraphQL", "Redis", "JWT", "Docker"]
+  },
+  {
+    "roleId": "FS005",
+    "title": "Django Backend Developer",
+    "category": "Full-Stack / Frontend / Backend",
+    "experienceLevel": "Mid",
+    "description": "Build robust Python web services and REST APIs using Django and Django REST Framework. Work with PostgreSQL and implement authentication, caching, and task queues.",
+    "requiredSkills": ["Python", "Django", "Django REST Framework", "PostgreSQL", "Git", "REST APIs"],
+    "preferredSkills": ["Celery", "Redis", "Docker", "pytest"]
+  },
+  {
+    "roleId": "FS006",
+    "title": "Spring Boot Backend Developer",
+    "category": "Full-Stack / Frontend / Backend",
+    "experienceLevel": "Mid",
+    "description": "Develop and maintain Java microservices using Spring Boot and Spring Cloud. Design RESTful APIs and integrate with relational databases and messaging systems.",
+    "requiredSkills": ["Java", "Spring Boot", "Spring MVC", "Hibernate", "MySQL", "Git"],
+    "preferredSkills": ["Kafka", "Docker", "JUnit 5", "Swagger/OpenAPI"]
+  },
+  {
+    "roleId": "FS007",
+    "title": "Ruby on Rails Backend Developer",
+    "category": "Full-Stack / Frontend / Backend",
+    "experienceLevel": "Mid",
+    "description": "Build convention-driven web applications and APIs using Ruby on Rails. Maintain high test coverage and optimize ActiveRecord queries for large datasets.",
+    "requiredSkills": ["Ruby", "Ruby on Rails", "PostgreSQL", "HTML/ERB", "Git", "REST APIs"],
+    "preferredSkills": ["RSpec", "Sidekiq", "Redis", "Heroku"]
+  },
+  {
+    "roleId": "FS008",
+    "title": "GraphQL API Developer",
+    "category": "Full-Stack / Frontend / Backend",
+    "experienceLevel": "Mid",
+    "description": "Design and implement GraphQL schemas, resolvers, and subscriptions for real-time applications. Optimize query performance and enforce schema-first API contracts.",
+    "requiredSkills": ["GraphQL", "Node.js", "Apollo Server", "PostgreSQL", "TypeScript", "Git"],
+    "preferredSkills": ["DataLoader", "Prisma", "Redis", "Docker"]
+  },
+  {
+    "roleId": "FS009",
+    "title": "Full-Stack Developer (MERN)",
+    "category": "Full-Stack / Frontend / Backend",
+    "experienceLevel": "Mid",
+    "description": "Develop end-to-end web applications using the MongoDB, Express, React, and Node.js stack. Own features from database schema design to responsive UI implementation.",
+    "requiredSkills": ["React", "Node.js", "Express.js", "MongoDB", "JavaScript", "REST APIs", "Git"],
+    "preferredSkills": ["Redux", "JWT", "Docker", "Mongoose"]
+  },
+  {
+    "roleId": "FS010",
+    "title": "Mobile-First Full-Stack Developer",
+    "category": "Full-Stack / Frontend / Backend",
+    "experienceLevel": "Mid",
+    "description": "Build cross-platform mobile applications using React Native with a Node.js or Firebase backend. Ensure seamless offline support and responsive design across devices.",
+    "requiredSkills": ["React Native", "JavaScript", "TypeScript", "Node.js", "REST APIs", "Git"],
+    "preferredSkills": ["Expo", "Firebase", "Redux Toolkit", "AsyncStorage"]
+  },
+  {
+    "roleId": "FS011",
+    "title": "Jamstack Developer",
+    "category": "Full-Stack / Frontend / Backend",
+    "experienceLevel": "Mid",
+    "description": "Build fast, secure, and scalable web applications using Jamstack principles with Next.js or Gatsby. Integrate headless CMSs and third-party APIs to deliver content-rich experiences.",
+    "requiredSkills": ["Next.js", "React", "TypeScript", "GraphQL", "Git", "HTML5/CSS3"],
+    "preferredSkills": ["Contentful", "Netlify", "Vercel", "Tailwind CSS"]
+  },
+  {
+    "roleId": "FS012",
+    "title": "Backend for Frontend (BFF) Engineer",
+    "category": "Full-Stack / Frontend / Backend",
+    "experienceLevel": "Senior",
+    "description": "Design and maintain Backend-for-Frontend layers that aggregate microservices for specific client needs. Optimize API contracts, implement caching, and ensure resilient service-to-service communication.",
+    "requiredSkills": ["Node.js", "TypeScript", "REST APIs", "GraphQL", "Microservices", "Git"],
+    "preferredSkills": ["Apollo Gateway", "Redis", "gRPC", "OpenAPI"]
+  },
+  {
+    "roleId": "AI001",
+    "title": "Machine Learning Engineer",
+    "category": "AI / ML / Data Science",
+    "experienceLevel": "Mid",
+    "description": "Build, train, and deploy machine learning models for production use cases. Partner with data scientists to productionize experiments and maintain ML pipelines.",
+    "requiredSkills": ["Python", "Scikit-learn", "TensorFlow", "PyTorch", "SQL", "Git"],
+    "preferredSkills": ["MLflow", "Docker", "FastAPI", "Pandas"]
+  },
+  {
+    "roleId": "AI002",
+    "title": "Data Scientist",
+    "category": "AI / ML / Data Science",
+    "experienceLevel": "Mid",
+    "description": "Analyze complex datasets to extract actionable business insights and build predictive models. Communicate findings clearly to both technical and non-technical stakeholders.",
+    "requiredSkills": ["Python", "Pandas", "NumPy", "Scikit-learn", "Statistics", "SQL"],
+    "preferredSkills": ["R", "Tableau", "Spark", "Jupyter"]
+  },
+  {
+    "roleId": "AI003",
+    "title": "NLP Engineer",
+    "category": "AI / ML / Data Science",
+    "experienceLevel": "Mid",
+    "description": "Design and deploy natural language processing pipelines for tasks including text classification, NER, summarization, and sentiment analysis. Fine-tune transformer models for domain-specific applications.",
+    "requiredSkills": ["Python", "Hugging Face Transformers", "PyTorch", "NLTK", "spaCy", "SQL"],
+    "preferredSkills": ["FastAPI", "Elasticsearch", "MLflow", "Docker"]
+  },
+  {
+    "roleId": "AI004",
+    "title": "Computer Vision Engineer",
+    "category": "AI / ML / Data Science",
+    "experienceLevel": "Mid",
+    "description": "Develop computer vision models for image classification, object detection, and segmentation. Optimize inference pipelines for real-time and edge deployment.",
+    "requiredSkills": ["Python", "PyTorch", "OpenCV", "CNNs", "NumPy", "Git"],
+    "preferredSkills": ["ONNX", "TensorRT", "CUDA", "Docker"]
+  },
+  {
+    "roleId": "AI005",
+    "title": "MLOps Engineer",
+    "category": "AI / ML / Data Science",
+    "experienceLevel": "Mid",
+    "description": "Build and maintain ML infrastructure including model training pipelines, experiment tracking, model registries, and deployment workflows. Bridge the gap between data science and production engineering.",
+    "requiredSkills": ["Python", "MLflow", "Kubeflow", "Docker", "Kubernetes", "CI/CD"],
+    "preferredSkills": ["Airflow", "DVC", "Terraform", "Prometheus"]
+  },
+  {
+    "roleId": "AI006",
+    "title": "Data Analyst",
+    "category": "AI / ML / Data Science",
+    "experienceLevel": "Junior",
+    "description": "Query, clean, and visualize data to support business decision-making. Build dashboards and reports that track key performance indicators across product and operations.",
+    "requiredSkills": ["SQL", "Excel", "Python", "Data Visualization", "Statistics"],
+    "preferredSkills": ["Tableau", "Power BI", "Pandas", "Google BigQuery"]
+  },
+  {
+    "roleId": "AI007",
+    "title": "AI Research Scientist",
+    "category": "AI / ML / Data Science",
+    "experienceLevel": "Senior",
+    "description": "Conduct original research in machine learning, publish findings, and prototype novel algorithms. Translate cutting-edge research into practical improvements for product ML systems.",
+    "requiredSkills": ["Python", "PyTorch", "Deep Learning", "Linear Algebra", "Statistics", "LaTeX"],
+    "preferredSkills": ["JAX", "CUDA", "Distributed Training", "Hugging Face"]
+  },
+  {
+    "roleId": "AI008",
+    "title": "Deep Learning Engineer",
+    "category": "AI / ML / Data Science",
+    "experienceLevel": "Mid",
+    "description": "Design and optimize deep neural networks for large-scale production applications. Work with GPU clusters to accelerate training and conduct ablation studies to improve model performance.",
+    "requiredSkills": ["Python", "PyTorch", "TensorFlow", "CUDA", "CNNs", "Transformers"],
+    "preferredSkills": ["Mixed Precision Training", "Distributed Training", "ONNX", "W&B"]
+  },
+  {
+    "roleId": "AI009",
+    "title": "Generative AI Engineer",
+    "category": "AI / ML / Data Science",
+    "experienceLevel": "Mid",
+    "description": "Build applications powered by large language models and multimodal generative AI systems. Design prompt engineering strategies, RAG pipelines, and agentic workflows.",
+    "requiredSkills": ["Python", "LangChain", "OpenAI API", "Prompt Engineering", "REST APIs", "Git"],
+    "preferredSkills": ["LlamaIndex", "Vector Databases", "FastAPI", "Streamlit"]
+  },
+  {
+    "roleId": "AI010",
+    "title": "LLM Fine-tuning Engineer",
+    "category": "AI / ML / Data Science",
+    "experienceLevel": "Mid",
+    "description": "Specialize in fine-tuning large language models using techniques like LoRA, RLHF, and instruction tuning. Evaluate model quality and manage datasets for domain adaptation.",
+    "requiredSkills": ["Python", "PyTorch", "Hugging Face Transformers", "PEFT", "CUDA", "Git"],
+    "preferredSkills": ["DeepSpeed", "W&B", "RLHF", "Axolotl"]
+  },
+  {
+    "roleId": "AI011",
+    "title": "Analytics Engineer",
+    "category": "AI / ML / Data Science",
+    "experienceLevel": "Mid",
+    "description": "Build and maintain clean, well-tested data models in the analytics layer using dbt. Bridge the gap between raw data engineering and business analytics by owning semantic data models.",
+    "requiredSkills": ["SQL", "dbt", "Python", "Data Warehousing", "Git", "Dimensional Modeling"],
+    "preferredSkills": ["Snowflake", "BigQuery", "Airflow", "Tableau"]
+  },
+  {
+    "roleId": "AI012",
+    "title": "BI Developer",
+    "category": "AI / ML / Data Science",
+    "experienceLevel": "Mid",
+    "description": "Design and develop business intelligence dashboards and reports using Power BI or Tableau. Translate complex business requirements into clear, interactive data visualizations.",
+    "requiredSkills": ["Power BI", "SQL", "DAX", "Data Modeling", "Excel"],
+    "preferredSkills": ["Tableau", "Azure Synapse", "Python", "SSRS"]
+  },
+  {
+    "roleId": "CD001",
+    "title": "AWS Cloud Engineer",
+    "category": "Cloud / DevOps",
+    "experienceLevel": "Mid",
+    "description": "Design, deploy, and manage cloud infrastructure on Amazon Web Services. Implement cost-effective architectures using EC2, S3, RDS, Lambda, and VPC components.",
+    "requiredSkills": ["AWS", "Terraform", "Linux", "Python", "Networking", "IAM"],
+    "preferredSkills": ["AWS CDK", "CloudFormation", "EKS", "Cost Explorer"]
+  },
+  {
+    "roleId": "CD002",
+    "title": "GCP Cloud Engineer",
+    "category": "Cloud / DevOps",
+    "experienceLevel": "Mid",
+    "description": "Build and manage scalable cloud workloads on Google Cloud Platform. Work with GKE, BigQuery, Cloud Run, and Pub/Sub to deliver reliable, cloud-native solutions.",
+    "requiredSkills": ["GCP", "Terraform", "Kubernetes", "Python", "Linux", "Networking"],
+    "preferredSkills": ["Dataflow", "BigQuery", "Cloud Functions", "Anthos"]
+  },
+  {
+    "roleId": "CD003",
+    "title": "Azure Cloud Engineer",
+    "category": "Cloud / DevOps",
+    "experienceLevel": "Mid",
+    "description": "Architect and operate Azure cloud environments for enterprise workloads. Manage Azure VMs, AKS, Azure DevOps pipelines, and Azure Active Directory integrations.",
+    "requiredSkills": ["Azure", "Terraform", "ARM Templates", "PowerShell", "Azure DevOps", "Linux"],
+    "preferredSkills": ["Bicep", "Azure Monitor", "AKS", "Cost Management"]
+  },
+  {
+    "roleId": "CD004",
+    "title": "DevOps Engineer",
+    "category": "Cloud / DevOps",
+    "experienceLevel": "Mid",
+    "description": "Build and maintain CI/CD pipelines, automate infrastructure provisioning, and improve deployment reliability and velocity. Champion DevOps culture across engineering teams.",
+    "requiredSkills": ["CI/CD", "Docker", "Kubernetes", "Linux", "Git", "Bash/Shell Scripting"],
+    "preferredSkills": ["Jenkins", "GitLab CI", "Ansible", "Prometheus"]
+  },
+  {
+    "roleId": "CD005",
+    "title": "Site Reliability Engineer",
+    "category": "Cloud / DevOps",
+    "experienceLevel": "Senior",
+    "description": "Define and enforce SLIs, SLOs, and error budgets to ensure production system reliability. Lead incident response, conduct post-mortems, and reduce toil through automation.",
+    "requiredSkills": ["Linux", "Python", "Go", "Kubernetes", "Prometheus", "Incident Management"],
+    "preferredSkills": ["Grafana", "PagerDuty", "Chaos Engineering", "Terraform"]
+  },
+  {
+    "roleId": "CD006",
+    "title": "Platform Engineer (Cloud)",
+    "category": "Cloud / DevOps",
+    "experienceLevel": "Senior",
+    "description": "Build internal cloud platforms and self-service tooling that enable development teams to deploy faster. Own the developer experience layer including golden path templates and service catalogs.",
+    "requiredSkills": ["Kubernetes", "Terraform", "Helm", "Go", "Python", "CI/CD"],
+    "preferredSkills": ["Backstage", "ArgoCD", "Crossplane", "OpenTelemetry"]
+  },
+  {
+    "roleId": "CD007",
+    "title": "Infrastructure Engineer",
+    "category": "Cloud / DevOps",
+    "experienceLevel": "Mid",
+    "description": "Provision and maintain cloud and on-premises infrastructure using infrastructure-as-code tools. Manage networking, storage, and compute resources for production workloads.",
+    "requiredSkills": ["Terraform", "Ansible", "Linux", "Networking", "Docker", "Git"],
+    "preferredSkills": ["Packer", "AWS", "Puppet", "Consul"]
+  },
+  {
+    "roleId": "CD008",
+    "title": "Kubernetes Specialist",
+    "category": "Cloud / DevOps",
+    "experienceLevel": "Senior",
+    "description": "Design and operate large-scale Kubernetes clusters, including custom operators, admission controllers, and multi-cluster federation. Optimize workload scheduling, resource management, and cluster security.",
+    "requiredSkills": ["Kubernetes", "Helm", "Docker", "Linux", "Go", "Networking"],
+    "preferredSkills": ["Istio", "Karpenter", "Cilium", "Velero"]
+  },
+  {
+    "roleId": "CD009",
+    "title": "Cloud Architect",
+    "category": "Cloud / DevOps",
+    "experienceLevel": "Senior",
+    "description": "Define cloud architecture strategy and govern infrastructure standards across the organization. Evaluate technology options and design multi-region, highly available solutions.",
+    "requiredSkills": ["Cloud Architecture", "AWS", "Azure", "Terraform", "Networking", "Security"],
+    "preferredSkills": ["Multi-cloud Strategy", "FinOps", "Service Mesh", "Zero Trust"]
+  },
+  {
+    "roleId": "CD010",
+    "title": "FinOps Engineer",
+    "category": "Cloud / DevOps",
+    "experienceLevel": "Mid",
+    "description": "Optimize cloud spending by analyzing usage data, rightsizing resources, and implementing cost governance policies. Work with engineering and finance teams to drive cloud financial accountability.",
+    "requiredSkills": ["AWS Cost Explorer", "Azure Cost Management", "Terraform", "Python", "SQL", "Excel"],
+    "preferredSkills": ["CloudHealth", "Spot.io", "GCP Billing", "Kubecost"]
+  },
+  {
+    "roleId": "CS001",
+    "title": "Security Analyst",
+    "category": "Cybersecurity",
+    "experienceLevel": "Junior",
+    "description": "Monitor security alerts, investigate potential threats, and perform vulnerability assessments. Contribute to incident response procedures and help maintain the security posture of the organization.",
+    "requiredSkills": ["SIEM", "Network Security", "Linux", "Wireshark", "Incident Response"],
+    "preferredSkills": ["Splunk", "CrowdStrike", "MITRE ATT&CK", "Nmap"]
+  },
+  {
+    "roleId": "CS002",
+    "title": "Penetration Tester",
+    "category": "Cybersecurity",
+    "experienceLevel": "Mid",
+    "description": "Conduct authorized offensive security assessments against web applications, networks, and cloud environments. Produce detailed vulnerability reports with prioritized remediation recommendations.",
+    "requiredSkills": ["Penetration Testing", "Burp Suite", "Metasploit", "Kali Linux", "Networking", "Python"],
+    "preferredSkills": ["OSCP", "Web App Hacking", "Active Directory", "Report Writing"]
+  },
+  {
+    "roleId": "CS003",
+    "title": "Application Security Engineer",
+    "category": "Cybersecurity",
+    "experienceLevel": "Mid",
+    "description": "Integrate security into the SDLC by performing threat modeling, secure code reviews, and SAST/DAST scanning. Educate developers on secure coding practices and champion security-by-design.",
+    "requiredSkills": ["OWASP Top 10", "SAST/DAST", "Threat Modeling", "Python", "Git", "Secure Coding"],
+    "preferredSkills": ["Semgrep", "Snyk", "Burp Suite", "DevSecOps"]
+  },
+  {
+    "roleId": "CS004",
+    "title": "Cloud Security Engineer",
+    "category": "Cybersecurity",
+    "experienceLevel": "Mid",
+    "description": "Secure cloud infrastructure by implementing IAM policies, network segmentation, encryption, and compliance controls. Continuously audit cloud posture using CSPM tools.",
+    "requiredSkills": ["AWS Security", "IAM", "Terraform", "CSPM", "Networking", "Linux"],
+    "preferredSkills": ["Prisma Cloud", "AWS GuardDuty", "Zero Trust", "GCP Security Command Center"]
+  },
+  {
+    "roleId": "CS005",
+    "title": "SOC Analyst",
+    "category": "Cybersecurity",
+    "experienceLevel": "Junior",
+    "description": "Provide first and second line monitoring and analysis of security events from SIEM platforms. Triage alerts, escalate confirmed incidents, and document findings for the security team.",
+    "requiredSkills": ["SIEM", "Splunk", "Incident Response", "Networking", "Windows/Linux"],
+    "preferredSkills": ["SOAR", "Threat Intelligence", "CrowdStrike", "MITRE ATT&CK"]
+  },
+  {
+    "roleId": "CS006",
+    "title": "Security Engineer",
+    "category": "Cybersecurity",
+    "experienceLevel": "Senior",
+    "description": "Design and build security systems, authentication frameworks, and detection infrastructure at scale. Partner with platform and product teams to enforce security architecture across all services.",
+    "requiredSkills": ["Security Engineering", "Python", "Go", "Networking", "Cryptography", "IAM"],
+    "preferredSkills": ["Zero Trust", "OAuth2/OIDC", "SIEM", "Kubernetes Security"]
+  },
+  {
+    "roleId": "QA001",
+    "title": "QA Engineer",
+    "category": "QA / Automation",
+    "experienceLevel": "Junior",
+    "description": "Design and execute test cases for web and backend applications to ensure product quality. Work closely with developers to identify defects early in the development cycle.",
+    "requiredSkills": ["Manual Testing", "Test Cases", "JIRA", "SQL", "API Testing"],
+    "preferredSkills": ["Selenium", "Postman", "SDLC", "Bug Reporting"]
+  },
+  {
+    "roleId": "QA002",
+    "title": "SDET (Software Development Engineer in Test)",
+    "category": "QA / Automation",
+    "experienceLevel": "Mid",
+    "description": "Build scalable test automation frameworks for UI, API, and integration testing. Contribute to CI pipelines by integrating automated test suites and maintaining flakiness dashboards.",
+    "requiredSkills": ["Python", "Selenium", "Pytest", "REST APIs", "CI/CD", "Git"],
+    "preferredSkills": ["Playwright", "Allure Reports", "Docker", "TestNG"]
+  },
+  {
+    "roleId": "QA003",
+    "title": "Performance Test Engineer",
+    "category": "QA / Automation",
+    "experienceLevel": "Mid",
+    "description": "Design and execute load, stress, and endurance tests to validate system performance under realistic and peak conditions. Identify bottlenecks and work with engineering teams on resolution.",
+    "requiredSkills": ["JMeter", "k6", "Gatling", "Performance Profiling", "Linux", "SQL"],
+    "preferredSkills": ["Grafana", "InfluxDB", "AWS", "Python"]
+  },
+  {
+    "roleId": "QA004",
+    "title": "Mobile QA Engineer",
+    "category": "QA / Automation",
+    "experienceLevel": "Mid",
+    "description": "Validate mobile app quality on iOS and Android through manual and automated testing. Use Appium or Espresso to build device-farm automated regression suites.",
+    "requiredSkills": ["Appium", "iOS Testing", "Android Testing", "Java", "Git", "API Testing"],
+    "preferredSkills": ["Espresso", "XCUITest", "BrowserStack", "Detox"]
+  },
+  {
+    "roleId": "QA005",
+    "title": "API Test Engineer",
+    "category": "QA / Automation",
+    "experienceLevel": "Mid",
+    "description": "Specialize in testing REST and GraphQL APIs using contract testing, schema validation, and automated regression suites. Ensure API quality, backward compatibility, and reliability.",
+    "requiredSkills": ["Postman", "REST APIs", "GraphQL", "Python", "Newman", "Git"],
+    "preferredSkills": ["Pact", "Karate DSL", "Swagger", "CI/CD"]
+  },
+  {
+    "roleId": "QA006",
+    "title": "Test Architect",
+    "category": "QA / Automation",
+    "experienceLevel": "Senior",
+    "description": "Define the test strategy, tooling, and quality frameworks across all engineering teams. Set standards for test coverage, flakiness thresholds, and shift-left quality practices.",
+    "requiredSkills": ["Test Strategy", "Selenium", "Playwright", "CI/CD", "Leadership", "Python"],
+    "preferredSkills": ["Test Management Tools", "BDD/Gherkin", "Microservices Testing", "Quality Metrics"]
+  },
+  {
+    "roleId": "PB001",
+    "title": "Product Manager",
+    "category": "Product / Business Analysis",
+    "experienceLevel": "Mid",
+    "description": "Define product vision, roadmap, and strategy by synthesizing customer needs, market data, and business goals. Work cross-functionally to prioritize and ship features that drive key outcomes.",
+    "requiredSkills": ["Product Roadmapping", "User Stories", "JIRA", "Data Analysis", "Stakeholder Management"],
+    "preferredSkills": ["A/B Testing", "SQL", "Figma", "OKRs"]
+  },
+  {
+    "roleId": "PB002",
+    "title": "Business Analyst",
+    "category": "Product / Business Analysis",
+    "experienceLevel": "Mid",
+    "description": "Elicit, document, and analyze business requirements to guide technology solutions. Bridge communication between business stakeholders and development teams throughout the project lifecycle.",
+    "requiredSkills": ["Requirements Gathering", "Business Process Modeling", "JIRA", "SQL", "Excel"],
+    "preferredSkills": ["BPMN", "Visio", "Tableau", "Agile/Scrum"]
+  },
+  {
+    "roleId": "PB003",
+    "title": "Technical Product Manager",
+    "category": "Product / Business Analysis",
+    "experienceLevel": "Senior",
+    "description": "Drive product strategy for technically complex platform and infrastructure products. Partner closely with engineering leads to define APIs, data contracts, and platform capabilities.",
+    "requiredSkills": ["Product Management", "System Design", "SQL", "API Design", "Agile", "Data Analysis"],
+    "preferredSkills": ["REST APIs", "Cloud Platforms", "JIRA", "OKRs"]
+  },
+  {
+    "roleId": "PB004",
+    "title": "Scrum Master",
+    "category": "Product / Business Analysis",
+    "experienceLevel": "Mid",
+    "description": "Facilitate Scrum ceremonies, remove impediments, and coach teams on Agile principles to maximize delivery effectiveness. Track team velocity and continuously improve sprint processes.",
+    "requiredSkills": ["Scrum", "Agile", "JIRA", "Facilitation", "Conflict Resolution"],
+    "preferredSkills": ["SAFe", "Kanban", "Confluence", "Retrospective Techniques"]
+  },
+  {
+    "roleId": "PB005",
+    "title": "Product Owner",
+    "category": "Product / Business Analysis",
+    "experienceLevel": "Mid",
+    "description": "Own and prioritize the product backlog to maximize value delivered by the development team. Write clear user stories, acceptance criteria, and collaborate with stakeholders to refine the roadmap.",
+    "requiredSkills": ["Backlog Management", "User Stories", "Acceptance Criteria", "JIRA", "Agile"],
+    "preferredSkills": ["Wireframing", "SQL", "Confluence", "Customer Interviews"]
+  },
+  {
+    "roleId": "PB006",
+    "title": "Solutions Architect",
+    "category": "Product / Business Analysis",
+    "experienceLevel": "Senior",
+    "description": "Design end-to-end technical solutions aligned with business requirements and enterprise architecture standards. Engage with clients and stakeholders to propose system designs and technology selections.",
+    "requiredSkills": ["System Design", "Cloud Architecture", "REST APIs", "Microservices", "SQL", "Stakeholder Management"],
+    "preferredSkills": ["AWS", "Azure", "TOGAF", "Diagram Tools"]
+  },
+  {
+    "roleId": "PB007",
+    "title": "Enterprise Architect",
+    "category": "Product / Business Analysis",
+    "experienceLevel": "Senior",
+    "description": "Define technology strategy and architectural governance at the enterprise level. Align IT capabilities with business strategy across multiple business units and long-term technology roadmaps.",
+    "requiredSkills": ["TOGAF", "Enterprise Architecture", "Cloud Strategy", "System Integration", "Leadership"],
+    "preferredSkills": ["ArchiMate", "BPMN", "Risk Management", "Vendor Management"]
+  },
+  {
+    "roleId": "PB008",
+    "title": "IT Business Analyst",
+    "category": "Product / Business Analysis",
+    "experienceLevel": "Junior",
+    "description": "Support IT projects by gathering and documenting requirements, assisting with UAT, and liaising between technical teams and business users. Maintain project documentation and track change requests.",
+    "requiredSkills": ["Requirements Documentation", "UAT", "SQL", "Excel", "JIRA", "Business Process Modeling"],
+    "preferredSkills": ["Visio", "Confluence", "MS Project", "Power BI"]
+  },
+  {
+    "roleId": "PB009",
+    "title": "Digital Product Manager",
+    "category": "Product / Business Analysis",
+    "experienceLevel": "Mid",
+    "description": "Lead the ideation, development, and optimization of digital products including web apps and mobile experiences. Use analytics and user research to drive data-informed product decisions.",
+    "requiredSkills": ["Product Management", "Google Analytics", "A/B Testing", "User Research", "JIRA", "Figma"],
+    "preferredSkills": ["SQL", "Mixpanel", "Growth Hacking", "OKRs"]
+  },
+  {
+    "roleId": "IT001",
+    "title": "IT Support Specialist",
+    "category": "Core IT",
+    "experienceLevel": "Junior",
+    "description": "Provide first and second line technical support to end users across hardware, software, and connectivity issues. Manage tickets using an ITSM platform and escalate complex issues to senior staff.",
+    "requiredSkills": ["Windows", "Active Directory", "ITSM", "Troubleshooting", "Networking Basics"],
+    "preferredSkills": ["Office 365", "ServiceNow", "Linux", "Remote Desktop Tools"]
+  },
+  {
+    "roleId": "IT002",
+    "title": "System Administrator",
+    "category": "Core IT",
+    "experienceLevel": "Mid",
+    "description": "Manage and maintain on-premises and cloud servers, ensuring uptime, security patching, and performance monitoring. Administer user accounts, group policies, and system backups.",
+    "requiredSkills": ["Linux", "Windows Server", "Active Directory", "PowerShell", "Bash", "Networking"],
+    "preferredSkills": ["Ansible", "VMware", "Nagios", "Office 365 Admin"]
+  },
+  {
+    "roleId": "IT003",
+    "title": "Network Engineer",
+    "category": "Core IT",
+    "experienceLevel": "Mid",
+    "description": "Design, implement, and maintain enterprise network infrastructure including LAN, WAN, and SD-WAN environments. Troubleshoot complex Layer 2/3 routing and switching issues.",
+    "requiredSkills": ["Cisco IOS", "Routing & Switching", "BGP", "OSPF", "VPN", "Networking"],
+    "preferredSkills": ["SD-WAN", "Wireshark", "CCNA/CCNP", "Firewalls"]
+  },
+  {
+    "roleId": "IT004",
+    "title": "Database Administrator",
+    "category": "Core IT",
+    "experienceLevel": "Mid",
+    "description": "Install, configure, and maintain relational database systems, ensuring high availability, performance, and data integrity. Design backup strategies and optimize slow queries for production databases.",
+    "requiredSkills": ["SQL", "PostgreSQL", "MySQL", "Database Tuning", "Backup & Recovery", "Linux"],
+    "preferredSkills": ["Oracle DBA", "MS SQL Server", "Replication", "Shell Scripting"]
+  },
+  {
+    "roleId": "IT005",
+    "title": "IT Project Manager",
+    "category": "Core IT",
+    "experienceLevel": "Senior",
+    "description": "Plan and deliver IT projects on time and within budget using PMI or Agile methodologies. Coordinate vendors, manage risks, and communicate project status to executive stakeholders.",
+    "requiredSkills": ["Project Management", "MS Project", "Risk Management", "Stakeholder Communication", "JIRA"],
+    "preferredSkills": ["PMP Certification", "Agile", "Confluence", "Change Management"]
+  },
+  {
+    "roleId": "IT006",
+    "title": "Help Desk Technician",
+    "category": "Core IT",
+    "experienceLevel": "Intern",
+    "description": "Respond to end-user support requests via phone, email, and chat. Resolve common hardware and software issues, reset credentials, and document all interactions in the ticketing system.",
+    "requiredSkills": ["Windows", "Troubleshooting", "Customer Service", "ITSM", "Office 365"],
+    "preferredSkills": ["Remote Desktop", "Active Directory", "ServiceNow", "MacOS"]
+  },
+  {
+    "roleId": "IT007",
+    "title": "Storage Engineer",
+    "category": "Core IT",
+    "experienceLevel": "Mid",
+    "description": "Design and manage enterprise storage solutions including SAN, NAS, and cloud object storage. Ensure data availability, disaster recovery readiness, and storage performance optimization.",
+    "requiredSkills": ["SAN", "NAS", "NetApp", "Storage Protocols", "Linux", "PowerShell"],
+    "preferredSkills": ["AWS S3", "Veeam", "Fibre Channel", "Zoning"]
+  },
+  {
+    "roleId": "IT008",
+    "title": "Virtualization Engineer",
+    "category": "Core IT",
+    "experienceLevel": "Mid",
+    "description": "Administer VMware vSphere or Hyper-V environments, managing VM provisioning, resource allocation, and cluster health. Plan and execute VM migrations, upgrades, and capacity planning.",
+    "requiredSkills": ["VMware vSphere", "ESXi", "Hyper-V", "Networking", "Linux", "PowerCLI"],
+    "preferredSkills": ["vSAN", "NSX-T", "vCenter", "Veeam Backup"]
+  },
+  {
+    "roleId": "IT009",
+    "title": "IT Auditor",
+    "category": "Core IT",
+    "experienceLevel": "Mid",
+    "description": "Assess IT controls, policies, and procedures to ensure compliance with regulatory frameworks like ISO 27001, SOC 2, and GDPR. Document findings and work with IT teams on remediation plans.",
+    "requiredSkills": ["IT Audit", "Risk Assessment", "ISO 27001", "SOC 2", "Compliance", "Excel"],
+    "preferredSkills": ["CISA Certification", "COBIT", "GDPR", "Audit Management Tools"]
+  },
+  {
+    "roleId": "IT010",
+    "title": "ERP Specialist",
+    "category": "Core IT",
+    "experienceLevel": "Mid",
+    "description": "Configure, maintain, and support ERP platforms such as SAP or Oracle for finance, HR, and supply chain modules. Gather requirements from business users and translate them into system configurations.",
+    "requiredSkills": ["SAP", "ERP Configuration", "SQL", "Business Process Analysis", "Excel"],
+    "preferredSkills": ["SAP FICO", "SAP MM", "Oracle ERP Cloud", "ABAP Basics"]
+  }
+]

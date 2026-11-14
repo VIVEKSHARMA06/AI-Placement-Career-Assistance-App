@@ -10,6 +10,8 @@ class Settings(BaseSettings):
     azure_translator_key: str | None = None
     azure_translator_endpoint: str | None = None
     azure_translator_region: str | None = None
+    gemini_api_key: str | None = None
+    gemini_model: str = "gemini-3.5-flash-lite"
 
     model_config = SettingsConfigDict(
         env_file=".env",

@@ -18,7 +18,7 @@ from app.services.language_processing import (
 router = APIRouter(prefix="/resume", tags=["resume"])
 
 
-@router.post("/process", response_model=ResumeProcessingResponse)
+@router.post("/process", response_model=ResumeProcessingResponse, response_model_by_alias=True)
 def process_resume(request: ResumeProcessingRequest) -> ResumeProcessingResponse:
     """Detect resume language and translate non-English text to English."""
     try:
