@@ -19,9 +19,9 @@ const callPythonAPI = async (endpoint, data) => {
         const response = await pythonAPI.post(endpoint, data);
         return response.data;
     } catch (error) {
+        // Do not log provider responses or request payloads; they may contain resume data.
         console.error(
-            `Python API error at ${endpoint}:`,
-            error.response?.data || error.message
+            `Python API request failed at ${endpoint} (HTTP ${error.response?.status || "network error"}).`,
         );
 
         const message =
@@ -81,7 +81,36 @@ const predictSuitability = async ({
     return await callPythonAPI("/suitability/predict", payload);
 };
 
+// Resume translation may include bounded Azure retries, so allow more time than
+// the default timeout used by the other AI endpoints.
+const processResume = async ({ resumeId, resumeText }) => {
+    try {
+        const response = await pythonAPI.post(
+            "/resume/process",
+            { resumeId, resumeText },
+            { timeout: 120000 },
+        );
+        return response.data;
+    } catch (error) {
+        const statusCode = error.response?.status;
+        const safeError = new Error(
+            statusCode === 503
+                ? "Resume language processing is not configured or temporarily unavailable."
+                : statusCode === 422
+                    ? "Resume language could not be processed or is unsupported."
+                    : statusCode
+                        ? `Resume language processing failed (AI service HTTP ${statusCode}).`
+                        : "Resume language service could not be reached. Please try again.",
+        );
+        safeError.statusCode =
+            statusCode === 422 ? 422 : statusCode === 503 ? 503 : 502;
+        safeError.isPublic = true;
+        throw safeError;
+    }
+};
+
 module.exports = {
+    processResume,
     recommendJobs,
     recommendEducation,
     predictSuitability,

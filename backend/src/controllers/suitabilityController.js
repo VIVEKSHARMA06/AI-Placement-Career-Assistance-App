@@ -3,6 +3,7 @@ const Resume = require("../models/Resume");
 const PredictionResult = require("../models/PredictionResult");
 
 const { predictSuitability } = require("../services/pythonClient");
+const { getEnglishResumeText } = require("../services/resumeTextService");
 
 const predictCandidateSuitability = async (req, res) => {
     try {
@@ -66,6 +67,13 @@ const predictCandidateSuitability = async (req, res) => {
             });
         }
 
+        // The authenticated database record is authoritative; ignore any resumeText
+        // supplied inside candidateProfile by the client.
+        candidateProfile = {
+            ...candidateProfile,
+            resumeText: await getEnglishResumeText(resume),
+        };
+
         // The existing Python service must support this new request format.
         const pythonResponse = await predictSuitability({
             resumeId: resume._id.toString(),
@@ -112,8 +120,6 @@ const predictCandidateSuitability = async (req, res) => {
             predictionId: predictionResult._id,
         });
     } catch (error) {
-        console.error("Suitability prediction error:", error);
-
         return res.status(error.statusCode || 500).json({
             success: false,
             message:

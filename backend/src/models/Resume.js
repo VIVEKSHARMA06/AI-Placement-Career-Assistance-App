@@ -29,6 +29,23 @@ const resumeSchema = new mongoose.Schema(
                 `Extracted resume text must not exceed ${EXTRACTED_TEXT_MAX_LENGTH} characters.`,
             ],
         },
+        translatedText: {
+            type: String,
+            maxlength: [
+                EXTRACTED_TEXT_MAX_LENGTH,
+                `Translated resume text must not exceed ${EXTRACTED_TEXT_MAX_LENGTH} characters.`,
+            ],
+        },
+        detectedLanguage: {
+            type: String,
+            match: [
+                /^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/,
+                "Detected language must be a language code.",
+            ],
+        },
+        translationApplied: {
+            type: Boolean,
+        },
     },
     {
         timestamps: true,

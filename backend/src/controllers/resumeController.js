@@ -1,5 +1,6 @@
 const Resume = require("../models/Resume");
 const { extractTextFromPDF } = require("../services/pdfExtractor");
+const { getEnglishResumeText } = require("../services/resumeTextService");
 
 const createError = (message, statusCode, isPublic = true) => {
     const error = new Error(message);
@@ -37,11 +38,14 @@ const uploadResume = async (req, res, next) => {
         }
 
         const extractedText = await extractTextFromPDF(req.file.buffer);
-        const resume = await Resume.create({
+        const resume = new Resume({
             user: userId,
             fileName: getUploadedFileName(req.file),
             extractedText,
         });
+
+        await getEnglishResumeText(resume);
+        await resume.save();
 
         return res.status(201).json({
             success: true,

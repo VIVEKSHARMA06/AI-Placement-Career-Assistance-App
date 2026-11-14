@@ -1,5 +1,6 @@
 const Resume = require("../models/Resume");
 const { recommendJobs, recommendEducation } = require("../services/pythonClient");
+const { getEnglishResumeText } = require("../services/resumeTextService");
 
 
 // ==========================================
@@ -31,7 +32,7 @@ const getJobRecommendations = async (req, res) => {
         }
 
         // 3. Get extracted resume text
-        const resumeText = resume.extractedText;
+        const resumeText = await getEnglishResumeText(resume);
         if (!resumeText || !resumeText.trim()) {
             return res.status(400).json({
                 success: false,
@@ -53,11 +54,11 @@ const getJobRecommendations = async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Job recommendation error:", error.message);
-
-        return res.status(500).json({
+        return res.status(error?.isPublic ? error.statusCode : 500).json({
             success: false,
-            message: "Unable to get job recommendations",
+            message: error?.isPublic && error.message
+                ? error.message
+                : "Unable to get job recommendations",
         });
     }
 };
@@ -92,7 +93,7 @@ const getEducationRecommendations = async (req, res) => {
         }
 
         // 3. Get standardized English resume text
-        const resumeText = resume.extractedText;
+        const resumeText = await getEnglishResumeText(resume);
 
         if (!resumeText || !resumeText.trim()) {
             return res.status(400).json({
@@ -115,11 +116,11 @@ const getEducationRecommendations = async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Education recommendation error:", error.message);
-
-        return res.status(500).json({
+        return res.status(error?.isPublic ? error.statusCode : 500).json({
             success: false,
-            message: "Unable to get education recommendations",
+            message: error?.isPublic && error.message
+                ? error.message
+                : "Unable to get education recommendations",
         });
     }
 };

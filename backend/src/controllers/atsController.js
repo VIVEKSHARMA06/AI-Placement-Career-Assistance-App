@@ -2,6 +2,7 @@
 const Resume = require("../models/Resume");
 const mongoose = require("mongoose");
 const { analyzeResume } = require("@pranavraut033/ats-checker");
+const { getEnglishResumeText } = require("../services/resumeTextService");
 
 const createError = (message, statusCode) => {
     const error = new Error(message);
@@ -61,7 +62,7 @@ const checkATS = async (req, res, next) => {
         }
 
         // 4. Extract resume text
-        const resumeText = resume.extractedText;
+        const resumeText = await getEnglishResumeText(resume);
 
         if (
             typeof resumeText !== "string" ||
@@ -78,17 +79,6 @@ const checkATS = async (req, res, next) => {
             resumeText,
             jobDescription: jobDescription.trim(),
         });
-
-        console.log("ATS DEBUG:", {
-            resumeId,
-            resumeTextLength: resumeText.length,
-            jobDescriptionLength: jobDescription.trim().length,
-        });
-
-        console.log(
-            "ATS BREAKDOWN:",
-            result.breakdown
-        );
 
         // 6. Skills required by the job description
         const skillAliases = {
@@ -176,7 +166,6 @@ const checkATS = async (req, res, next) => {
             warnings: result.warnings || [],
         });
     } catch (error) {
-        console.error("ATS analysis error:", error.message);
         return next(error);
     }
 };
