@@ -1,0 +1,205 @@
+const PDFDocument = require("pdfkit");
+
+// Generate PDF report
+const generateCareerReport = (
+    res,
+    {
+        userName = "Candidate",
+        atsResult = null,
+        jobRecommendations = [],
+        educationRecommendations = [],
+        suitabilityResult = null,
+    }
+) => {
+    const doc = new PDFDocument({
+        margin: 50,
+        size: "A4",
+    });
+
+    // Set response headers
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+        "Content-Disposition",
+        'attachment; filename="career-report.pdf"'
+    );
+
+    // Send PDF directly to response
+    doc.pipe(res);
+
+    // =========================
+    // TITLE
+    // =========================
+    doc.fontSize(22).text("AI Career Assistance Report", {
+        align: "center",
+    });
+
+    doc.moveDown();
+
+    doc.fontSize(12).text(`Candidate: ${userName}`);
+
+    doc.moveDown(2);
+
+    // =========================
+    // ATS RESULT
+    // =========================
+    if (atsResult) {
+        doc.fontSize(16).text("ATS Analysis");
+
+        doc.moveDown(0.5);
+
+        doc
+            .fontSize(12)
+            .text(`ATS Score: ${atsResult.atsScore ?? "N/A"}`);
+
+        if (atsResult.matchedSkills?.length) {
+            doc.text(
+                `Matched Skills: ${atsResult.matchedSkills.join(", ")}`
+            );
+        }
+
+        if (atsResult.missingSkills?.length) {
+            doc.text(
+                `Missing Skills: ${atsResult.missingSkills.join(", ")}`
+            );
+        }
+
+        if (atsResult.keywordGaps?.length) {
+            doc.text(
+                `Keyword Gaps: ${atsResult.keywordGaps.join(", ")}`
+            );
+        }
+
+        if (atsResult.suggestions?.length) {
+            doc.moveDown(0.5);
+            doc.text("Suggestions:");
+
+            atsResult.suggestions.forEach((suggestion, index) => {
+                doc.text(`${index + 1}. ${suggestion}`);
+            });
+        }
+
+        doc.moveDown(2);
+    }
+
+    // =========================
+    // JOB RECOMMENDATIONS
+    // =========================
+    if (jobRecommendations.length > 0) {
+        doc.fontSize(16).text("Recommended Job Roles");
+
+        doc.moveDown(0.5);
+
+        jobRecommendations.forEach((job, index) => {
+            doc.fontSize(12).text(
+                `${index + 1}. ${job.jobRole || job.roleName || "Job Role"}`
+            );
+
+            doc.text(
+                `Match Score: ${job.matchScore ?? "N/A"}`
+            );
+
+            if (job.matchedSkills?.length) {
+                doc.text(
+                    `Matched Skills: ${job.matchedSkills.join(", ")}`
+                );
+            }
+
+            if (job.missingSkills?.length) {
+                doc.text(
+                    `Missing Skills: ${job.missingSkills.join(", ")}`
+                );
+            }
+
+            doc.moveDown();
+        });
+
+        doc.moveDown();
+    }
+
+    // =========================
+    // EDUCATION RECOMMENDATIONS
+    // =========================
+    if (educationRecommendations.length > 0) {
+        doc.fontSize(16).text("Recommended Higher Education Programs");
+
+        doc.moveDown(0.5);
+
+        educationRecommendations.forEach((program, index) => {
+            doc.fontSize(12).text(
+                `${index + 1}. ${program.programName || "Education Program"
+                }`
+            );
+
+            doc.text(
+                `Match Score: ${program.matchScore ?? "N/A"}`
+            );
+
+            if (program.eligibility) {
+                doc.text(`Eligibility: ${program.eligibility}`);
+            }
+
+            if (program.entranceExam) {
+                const exam = Array.isArray(program.entranceExam)
+                    ? program.entranceExam.join(", ")
+                    : program.entranceExam;
+
+                doc.text(`Entrance Exam: ${exam}`);
+            }
+
+            doc.moveDown();
+        });
+
+        doc.moveDown();
+    }
+
+    // =========================
+    // SUITABILITY RESULT
+    // =========================
+    if (suitabilityResult) {
+        doc.fontSize(16).text("Candidate Suitability Prediction");
+
+        doc.moveDown(0.5);
+
+        doc.fontSize(12).text(
+            `Suitability Score: ${suitabilityResult.suitabilityScore ?? "N/A"
+            }`
+        );
+
+        doc.text(
+            `Prediction: ${suitabilityResult.predictionLabel ?? "N/A"
+            }`
+        );
+
+        if (suitabilityResult.geminiSuggestions?.length) {
+            doc.moveDown(0.5);
+            doc.text("Improvement Suggestions:");
+
+            suitabilityResult.geminiSuggestions.forEach(
+                (suggestion, index) => {
+                    doc.text(`${index + 1}. ${suggestion}`);
+                }
+            );
+        }
+    }
+
+    // =========================
+    // FOOTER
+    // =========================
+    doc.moveDown(2);
+
+    doc
+        .fontSize(9)
+        .text(
+            "Generated by AI Placement & Career Assistance App",
+            {
+                align: "center",
+            }
+        );
+
+    // Finish PDF
+    doc.end();
+};
+
+module.exports = {
+    generateCareerReport,
+};
