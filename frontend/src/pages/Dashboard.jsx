@@ -1,5 +1,14 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, FileText, Sparkles, Upload } from "lucide-react";
+import {
+  ArrowRight,
+  BriefcaseBusiness,
+  FileSearch,
+  FileText,
+  GraduationCap,
+  Sparkles,
+  Target,
+  Upload,
+} from "lucide-react";
 
 import { useAuth } from "../context/useAuth";
 
@@ -22,6 +31,39 @@ const featureCards = [
     cta: "Manage resume",
     accent: "violet",
   },
+  {
+    to: "/job-recommendations",
+    icon: BriefcaseBusiness,
+    title: "Job Recommendations",
+    description:
+      "Find roles that align with the skills in a resume you choose.",
+    cta: "Explore jobs",
+    accent: "blue",
+  },
+  {
+    to: "/education-recommendations",
+    icon: GraduationCap,
+    title: "Education Recommendations",
+    description: "Explore study programs related to your experience and goals.",
+    cta: "Explore programs",
+    accent: "emerald",
+  },
+  {
+    to: "/suitability",
+    icon: Target,
+    title: "Suitability Checker",
+    description: "Compare a selected resume with a job description.",
+    cta: "Check suitability",
+    accent: "amber",
+  },
+  {
+    to: "/ats-checker",
+    icon: FileSearch,
+    title: "ATS Score Checker",
+    description: "Review matching skills and keywords for a target role.",
+    cta: "Check ATS score",
+    accent: "cyan",
+  },
 ];
 
 const accentStyles = {
@@ -41,6 +83,36 @@ const accentStyles = {
       "text-slate-400 group-hover:translate-x-1 group-hover:text-violet-600",
     ring: "focus-visible:ring-violet-100",
   },
+  blue: {
+    iconBg: "bg-blue-50 text-blue-700 group-hover:bg-blue-100",
+    border: "hover:border-blue-200",
+    cta: "text-blue-700",
+    arrow: "text-slate-400 group-hover:translate-x-1 group-hover:text-blue-700",
+    ring: "focus-visible:ring-blue-100",
+  },
+  emerald: {
+    iconBg: "bg-emerald-50 text-emerald-700 group-hover:bg-emerald-100",
+    border: "hover:border-emerald-200",
+    cta: "text-emerald-700",
+    arrow:
+      "text-slate-400 group-hover:translate-x-1 group-hover:text-emerald-700",
+    ring: "focus-visible:ring-emerald-100",
+  },
+  amber: {
+    iconBg: "bg-amber-50 text-amber-700 group-hover:bg-amber-100",
+    border: "hover:border-amber-200",
+    cta: "text-amber-700",
+    arrow:
+      "text-slate-400 group-hover:translate-x-1 group-hover:text-amber-700",
+    ring: "focus-visible:ring-amber-100",
+  },
+  cyan: {
+    iconBg: "bg-cyan-50 text-cyan-700 group-hover:bg-cyan-100",
+    border: "hover:border-cyan-200",
+    cta: "text-cyan-700",
+    arrow: "text-slate-400 group-hover:translate-x-1 group-hover:text-cyan-700",
+    ring: "focus-visible:ring-cyan-100",
+  },
 };
 
 const Dashboard = () => {
@@ -55,7 +127,7 @@ const Dashboard = () => {
 
   return (
     <div className="animate-fade-in px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-5xl">
         {/* ── Hero ────────────────────────────────────── */}
         <section aria-labelledby="dashboard-heading" className="mb-10 sm:mb-12">
           <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700">

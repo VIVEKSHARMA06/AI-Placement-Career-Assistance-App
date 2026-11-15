@@ -8,20 +8,27 @@ import {
   X,
 } from "lucide-react";
 
-import { getResume } from "../services/resumeService";
 import { predictSuitability } from "../services/careerService";
 import ScoreGauge from "../components/ScoreGauge";
 import LimeChart from "../components/LimeChart";
+import ResumeSelector from "../components/ResumeSelector";
 
 const MAX_JD_FILE_SIZE = 5 * 1024 * 1024;
 
 const Suitability = () => {
+  const [resume, setResume] = useState(null);
   const [jobDescription, setJobDescription] = useState("");
   const [jdFile, setJdFile] = useState(null);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const fileInputRef = useRef(null);
+
+  const handleResumeChange = (selectedResume) => {
+    setResume(selectedResume);
+    setResult(null);
+    setError("");
+  };
 
   const handleFileChange = async (event) => {
     const file = event.target.files?.[0];
@@ -82,32 +89,19 @@ const Suitability = () => {
       return;
     }
 
+    const resumeId = resume?.id || resume?._id;
+    if (!resumeId) {
+      setError("Select or upload a resume before checking suitability.");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const resumeResponse = await getResume();
-      const resume = resumeResponse?.data?.resume;
-      const resumeId = resume?.id || resume?._id;
-
-      if (!resumeId) {
-        throw new Error("Please upload a resume before checking suitability.");
-      }
-
-      if (!resume.extractedText?.trim()) {
-        throw new Error(
-          "Resume text is missing. Please upload your resume again.",
-        );
-      }
-
-      // Send JD text and optional file to the updated API.
-      // The backend must support this request contract.
       const payload = new FormData();
       payload.append("resumeId", resumeId);
       payload.append("jobDescription", jobDescription.trim());
-      payload.append(
-        "candidateProfile",
-        JSON.stringify({ resumeText: resume.extractedText }),
-      );
+      payload.append("candidateProfile", JSON.stringify({}));
 
       if (jdFile) {
         payload.append("jobDescriptionFile", jdFile);
@@ -178,6 +172,12 @@ const Suitability = () => {
           </div>
         </div>
       </header>
+
+      <ResumeSelector
+        label="Choose a resume for suitability analysis"
+        value={resume?.id || resume?._id || ""}
+        onChange={handleResumeChange}
+      />
 
       <form
         onSubmit={handleSubmit}
@@ -269,7 +269,7 @@ const Suitability = () => {
 
         <button
           type="submit"
-          disabled={loading}
+          disabled={loading || !resume}
           className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {loading && <LoaderCircle size={18} className="animate-spin" />}

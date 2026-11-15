@@ -93,7 +93,7 @@ const Sidebar = ({ children }) => {
         {/* Brand */}
         <div className="flex h-16 shrink-0 items-center gap-3 border-b border-slate-100 px-5">
           <div className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-600 to-violet-600 shadow-sm">
-            <FileText className="size-4 text-white" strokeWidth={2} />
+            <BriefcaseBusiness className="size-4 text-white" strokeWidth={2} />
           </div>
           <span className="text-sm font-semibold tracking-tight text-slate-900">
             Career Assistant
@@ -181,7 +181,10 @@ const Sidebar = ({ children }) => {
           </button>
           <div className="flex items-center gap-2">
             <div className="flex size-7 items-center justify-center rounded-md bg-gradient-to-br from-indigo-600 to-violet-600">
-              <FileText className="size-3.5 text-white" strokeWidth={2} />
+              <BriefcaseBusiness
+                className="size-3.5 text-white"
+                strokeWidth={2}
+              />
             </div>
             <span className="text-sm font-semibold text-slate-900">
               Career Assistant

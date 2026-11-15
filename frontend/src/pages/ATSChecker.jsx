@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   AlertCircle,
   ArrowRight,
   CheckCircle2,
-  FileSearch,
   LoaderCircle,
   RefreshCw,
   ShieldCheck,
@@ -12,8 +11,8 @@ import {
   XCircle,
 } from "lucide-react";
 
-import { getResume } from "../services/resumeService";
 import { checkATS } from "../services/careerService";
+import ResumeSelector from "../components/ResumeSelector";
 
 const getErrorMessage = (error) =>
   error?.response?.data?.error?.message ||
@@ -25,49 +24,14 @@ const ATSChecker = () => {
   const [resume, setResume] = useState(null);
   const [jobDescription, setJobDescription] = useState("");
   const [result, setResult] = useState(null);
-  const [loadingResume, setLoadingResume] = useState(true);
   const [checking, setChecking] = useState(false);
   const [error, setError] = useState("");
-  const [resumeError, setResumeError] = useState("");
 
-  useEffect(() => {
-    let active = true;
-
-    const loadResume = async () => {
-      setLoadingResume(true);
-      setResumeError("");
-
-      try {
-        const response = await getResume();
-        const savedResume = response?.data?.resume;
-
-        if (!savedResume) {
-          throw new Error(
-            "No uploaded resume was found. Please upload your resume first.",
-          );
-        }
-
-        if (active) {
-          setResume(savedResume);
-        }
-      } catch (err) {
-        if (active) {
-          setResume(null);
-          setResumeError(getErrorMessage(err));
-        }
-      } finally {
-        if (active) {
-          setLoadingResume(false);
-        }
-      }
-    };
-
-    loadResume();
-
-    return () => {
-      active = false;
-    };
-  }, []);
+  const handleResumeChange = (selectedResume) => {
+    setResume(selectedResume);
+    setResult(null);
+    setError("");
+  };
 
   const handleCheck = async (event) => {
     event.preventDefault();
@@ -75,7 +39,7 @@ const ATSChecker = () => {
     setResult(null);
 
     if (!resume) {
-      setError("Please upload a resume before running ATS analysis.");
+      setError("Select or upload a resume before running ATS analysis.");
       return;
     }
 
@@ -163,49 +127,11 @@ const ATSChecker = () => {
           </p>
         </header>
 
-        {/* Resume status */}
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <div className="flex items-start gap-4">
-            <div className="rounded-xl bg-blue-50 p-3 text-blue-700">
-              <FileSearch size={25} />
-            </div>
-
-            <div className="min-w-0 flex-1">
-              <h2 className="font-semibold">Your uploaded resume</h2>
-
-              {loadingResume ? (
-                <p className="mt-2 flex items-center gap-2 text-sm text-slate-500">
-                  <LoaderCircle size={16} className="animate-spin" />
-                  Loading resume...
-                </p>
-              ) : resume ? (
-                <>
-                  <p className="mt-1 break-words text-sm text-slate-600">
-                    {resume.fileName || "Uploaded resume"}
-                  </p>
-
-                  <p className="mt-2 flex items-center gap-2 text-sm text-emerald-700">
-                    <CheckCircle2 size={16} />
-                    Resume found
-                  </p>
-                </>
-              ) : (
-                <p className="mt-2 text-sm text-red-600">
-                  {resumeError || "No resume is available."}
-                </p>
-              )}
-            </div>
-
-            {!loadingResume && !resume && (
-              <a
-                href="/resume-upload"
-                className="shrink-0 text-sm font-semibold text-blue-700 hover:underline"
-              >
-                Upload resume
-              </a>
-            )}
-          </div>
-        </section>
+        <ResumeSelector
+          label="Choose a resume for ATS analysis"
+          value={resume?.id || resume?._id || ""}
+          onChange={handleResumeChange}
+        />
 
         {/* ATS form */}
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
@@ -238,9 +164,7 @@ const ATSChecker = () => {
 
               <button
                 type="submit"
-                disabled={
-                  checking || loadingResume || !resume || !jobDescription.trim()
-                }
+                disabled={checking || !resume || !jobDescription.trim()}
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {checking ? (
@@ -373,10 +297,16 @@ const ATSChecker = () => {
                     <ShieldCheck size={21} className="text-blue-600" />
                     <h3 className="font-semibold">Analysis overview</h3>
                   </div>
+                  <p className="mt-1 text-sm text-slate-500">
+                    Experience requirements are counted only when stated in the
+                    job description.
+                  </p>
 
                   <div className="mt-5 grid gap-4 sm:grid-cols-2">
                     <div>
-                      <p className="text-sm text-slate-500">Experience gap</p>
+                      <p className="text-sm text-slate-500">
+                        Years short of stated requirement
+                      </p>
                       <p className="mt-1 font-semibold">
                         {result.experienceAnalysis?.requiredGapYears ?? "N/A"}{" "}
                         {result.experienceAnalysis?.requiredGapYears != null

@@ -1,3 +1,26 @@
+const FEATURE_LABELS = {
+  token_jaccard: "Resume and job keyword overlap",
+  job_token_count: "Job description length",
+  resume_token_count: "Resume word count",
+  resume_unique_token_count: "Distinct terms in your resume",
+  job_unique_token_count: "Distinct terms in the job description",
+  shared_token_count: "Skills and keywords in common",
+  job_token_coverage: "Job requirements covered by your resume",
+  resume_token_coverage: "Resume content relevant to this job",
+  resume_length_chars: "Resume length",
+  job_length_chars: "Job description length",
+};
+
+const getFeatureLabel = (feature) => {
+  const key = String(feature)
+    .replace(/\s*(?:<=|>=|<|>|≤|≥)\s*[-+]?\d*\.?\d+.*$/, "")
+    .trim();
+  return (
+    FEATURE_LABELS[key] ||
+    key.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase())
+  );
+};
+
 const LimeChart = ({ explanations = [], title = "Prediction Explanation" }) => {
   // Accept either an array or an object containing feature explanations.
   const items = Array.isArray(explanations)
@@ -8,8 +31,9 @@ const LimeChart = ({ explanations = [], title = "Prediction Explanation" }) => {
 
   const normalizedItems = items
     .map((item, index) => ({
-      feature:
+      feature: getFeatureLabel(
         item.feature ?? item.name ?? item.label ?? `Feature ${index + 1}`,
+      ),
       value: Number(item.contribution ?? item.weight ?? item.value),
     }))
     .filter((item) => Number.isFinite(item.value))

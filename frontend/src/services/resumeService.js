@@ -13,7 +13,15 @@ export const getResume = async () => {
     return response.data;
 };
 
-export const deleteResume = async () => {
-    const response = await api.delete("/api/resume");
+export const getResumes = async () => {
+    const response = await api.get("/api/resume/list");
+    return response.data;
+};
+
+export const deleteResume = async (resumeId) => {
+    const path = resumeId
+        ? `/api/resume/${encodeURIComponent(resumeId)}`
+        : "/api/resume";
+    const response = await api.delete(path);
     return response.data;
 };

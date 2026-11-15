@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   BriefcaseBusiness,
   Building2,
@@ -12,8 +12,8 @@ import {
 } from "lucide-react";
 
 // import Sidebar from "../components/Sidebar";
-import { getResume } from "../services/resumeService";
 import { getJobRecommendations } from "../services/careerService";
+import ResumeSelector from "../components/ResumeSelector";
 
 const getErrorMessage = (error) =>
   error?.response?.data?.message ||
@@ -162,28 +162,33 @@ const JobCard = ({ job, index }) => {
 const JobRecommendations = () => {
   const [resume, setResume] = useState(null);
   const [jobs, setJobs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [hasRequested, setHasRequested] = useState(false);
 
-  const requestRecommendations = async () => {
+  const handleResumeChange = (selectedResume) => {
+    setResume(selectedResume);
+    setJobs([]);
+    setError("");
+    setHasRequested(false);
+    if (selectedResume) {
+      void loadRecommendations(selectedResume);
+    }
+  };
+
+  const loadRecommendations = async (selectedResume = resume) => {
+    const resumeId = selectedResume?.id || selectedResume?._id;
+    if (!resumeId) {
+      setError(
+        "Select or upload a resume before requesting job recommendations.",
+      );
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+    setHasRequested(true);
     try {
-      const resumeResponse = await getResume();
-      const savedResume = resumeResponse?.data?.resume;
-
-      if (!savedResume) {
-        throw new Error(
-          "No uploaded resume found. Upload your resume before requesting job recommendations.",
-        );
-      }
-
-      const resumeId = savedResume.id || savedResume._id;
-
-      if (!resumeId) {
-        throw new Error("Your saved resume does not have a valid ID.");
-      }
-
-      setResume(savedResume);
-
       const response = await getJobRecommendations(resumeId);
 
       if (response?.success !== true) {
@@ -203,16 +208,6 @@ const JobRecommendations = () => {
       setLoading(false);
     }
   };
-
-  const loadRecommendations = async () => {
-    setLoading(true);
-    setError("");
-    await requestRecommendations();
-  };
-
-  useEffect(() => {
-    void Promise.resolve().then(requestRecommendations);
-  }, []);
 
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-8 text-slate-900 sm:px-6 lg:px-10">
@@ -237,7 +232,7 @@ const JobRecommendations = () => {
           <button
             type="button"
             onClick={loadRecommendations}
-            disabled={loading}
+            disabled={loading || !resume}
             className="inline-flex items-center justify-center gap-2 self-start rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 disabled:opacity-50 sm:self-auto"
           >
             {loading ? (
@@ -245,9 +240,15 @@ const JobRecommendations = () => {
             ) : (
               <RefreshCw size={17} />
             )}
-            Refresh
+            Refresh results
           </button>
         </header>
+
+        <ResumeSelector
+          label="Choose a resume for job recommendations"
+          value={resume?.id || resume?._id || ""}
+          onChange={handleResumeChange}
+        />
 
         {resume && (
           <section className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4">
@@ -303,7 +304,17 @@ const JobRecommendations = () => {
           </div>
         )}
 
-        {!loading && !error && jobs.length === 0 && (
+        {!loading && !error && !hasRequested && (
+          <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-5 py-12 text-center">
+            <h2 className="text-lg font-semibold">Choose a resume to begin</h2>
+            <p className="mt-2 text-sm text-slate-500">
+              Select a saved resume or upload one above, then request job
+              matches.
+            </p>
+          </div>
+        )}
+
+        {!loading && !error && hasRequested && jobs.length === 0 && (
           <div className="rounded-2xl border border-slate-200 bg-white px-5 py-14 text-center">
             <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600">
               <Target size={28} />

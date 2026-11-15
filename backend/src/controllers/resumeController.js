@@ -1,7 +1,9 @@
 const Resume = require("../models/Resume");
+const mongoose = require("mongoose");
 const { extractTextFromPDF } = require("../services/pdfExtractor");
 const { getEnglishResumeText } = require("../services/resumeTextService");
 const { extractResumeProfile } = require("../services/pythonClient");
+const MAX_RESUMES_PER_USER = 5;
 
 const createError = (message, statusCode, isPublic = true) => {
     const error = new Error(message);
@@ -36,6 +38,14 @@ const uploadResume = async (req, res, next) => {
 
         if (!req.file) {
             throw createError("Resume file is required.", 400);
+        }
+
+        const resumeCount = await Resume.countDocuments({ user: userId });
+        if (resumeCount >= MAX_RESUMES_PER_USER) {
+            throw createError(
+                "You can save up to 5 resumes. Delete one before uploading another.",
+                409,
+            );
         }
 
         const extractedText = await extractTextFromPDF(req.file.buffer);
@@ -99,12 +109,38 @@ const getResume = async (req, res, next) => {
     }
 };
 
+const getResumes = async (req, res, next) => {
+    try {
+        const userId = getAuthenticatedUserId(req);
+        const resumes = await Resume.find({ user: userId }).sort({
+            createdAt: -1,
+        });
+
+        return res.status(200).json({
+            success: true,
+            data: { resumes },
+            error: null,
+        });
+    } catch (error) {
+        return next(error);
+    }
+};
+
 const deleteResume = async (req, res, next) => {
     try {
         const userId = getAuthenticatedUserId(req);
-        const resume = await Resume.findOneAndDelete({ user: userId }).sort({
-            createdAt: -1,
+        const resumeId = req.params.resumeId;
+        if (resumeId && !mongoose.isValidObjectId(resumeId)) {
+            throw createError("Resume ID is invalid.", 400);
+        }
+
+        const query = Resume.findOneAndDelete({
+            user: userId,
+            ...(resumeId ? { _id: resumeId } : {}),
         });
+        const resume = resumeId
+            ? await query
+            : await query.sort({ createdAt: -1 });
 
         if (!resume) {
             throw createError("Resume not found.", 404);
@@ -123,5 +159,6 @@ const deleteResume = async (req, res, next) => {
 module.exports = {
     uploadResume,
     getResume,
+    getResumes,
     deleteResume,
 };

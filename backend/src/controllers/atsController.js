@@ -78,6 +78,14 @@ const checkATS = async (req, res, next) => {
         const result = analyzeResume({
             resumeText,
             jobDescription: jobDescription.trim(),
+            config: {
+                profile: {
+                    name: "job-description",
+                    mandatorySkills: [],
+                    optionalSkills: [],
+                    minExperience: 0,
+                },
+            },
         });
 
         // 6. Skills required by the job description
