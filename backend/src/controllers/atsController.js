@@ -88,66 +88,36 @@ const checkATS = async (req, res, next) => {
             },
         });
 
-        // 6. Skills required by the job description
-        const skillAliases = {
-            javascript: ["javascript", "js"],
-            java: ["java"],
-            html: ["html"],
-            css: ["css"],
-            "tailwind css": ["tailwind css"],
-            "node.js": ["node.js", "nodejs", "node"],
-            express: ["express", "express.js", "expressjs"],
-            mongodb: ["mongodb", "mongo db"],
-            sql: ["sql", "mysql"],
-            react: ["react.js", "reactjs", "react"],
-            "react-router": ["react-router", "react router"],
-            typescript: ["typescript"],
-            rust: ["rust"],
-            python: ["python"],
+        // 6. Combine the analyzer's skill taxonomy with its broader job keywords.
+        const uniqueRequirements = (...groups) => {
+            const seen = new Set();
+            return groups
+                .flatMap((group) => (Array.isArray(group) ? group : []))
+                .filter((item) => typeof item === "string" && item.trim())
+                .map((item) => item.trim())
+                .filter((item) => {
+                    const key = normalizeSkill(item);
+                    if (!key || seen.has(key)) return false;
+                    seen.add(key);
+                    return true;
+                });
         };
 
-        const normalizeText = (text) =>
-            text.toLowerCase().replace(/[^a-z0-9+#.\s-]/g, " ");
-
-        const resumeNormalized = normalizeText(resumeText);
-        const jdNormalized = normalizeText(jobDescription);
-
-        const containsSkill = (text, aliases) =>
-            aliases.some((alias) => {
-                const escaped = alias.replace(
-                    /[.*+?^${}()|[\]\\]/g,
-                    "\\$&"
-                );
-
-                const pattern = new RegExp(
-                    `(^|[^a-z0-9+#])${escaped}($|[^a-z0-9+#])`,
-                    "i"
-                );
-
-                return pattern.test(text);
-            });
-
-        const requiredSkills = Object.entries(skillAliases)
-            .filter(([, aliases]) =>
-                containsSkill(jdNormalized, aliases)
-            )
-            .map(([skill]) => skill);
-
-        const matchedSkills = requiredSkills.filter((skill) =>
-            containsSkill(resumeNormalized, skillAliases[skill])
+        const matchedSkills = uniqueRequirements(result.matchedSkills);
+        const missingSkills = uniqueRequirements(result.missingSkills);
+        const matchedRequirements = uniqueRequirements(
+            matchedSkills,
+            result.matchedKeywords,
         );
-
-        const missingSkills = requiredSkills.filter(
-            (skill) => !matchedSkills.includes(skill)
+        const matchedRequirementKeys = new Set(
+            matchedRequirements.map(normalizeSkill),
         );
-
-        // 7. Keyword gaps from the ATS package
-        const keywordGaps = (result.missingKeywords || []).filter(
-            (keyword) =>
-                !matchedSkills.some(
-                    (skill) =>
-                        normalizeSkill(skill) === normalizeSkill(keyword)
-                )
+        const missingRequirements = uniqueRequirements(
+            missingSkills,
+            result.missingKeywords,
+        ).filter((item) => !matchedRequirementKeys.has(normalizeSkill(item)));
+        const keywordGaps = uniqueRequirements(result.missingKeywords).filter(
+            (item) => !matchedRequirementKeys.has(normalizeSkill(item)),
         );
 
         // 8. Return analysis to the frontend
@@ -156,6 +126,8 @@ const checkATS = async (req, res, next) => {
             atsScore: Number(result.score.toFixed(2)),
             matchedSkills,
             missingSkills,
+            matchedRequirements,
+            missingRequirements,
             keywordGaps,
 
             experienceAnalysis: {

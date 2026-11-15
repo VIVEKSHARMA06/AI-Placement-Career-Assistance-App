@@ -34,7 +34,10 @@ const getEnglishResumeText = async (resume) => {
     }
 
     if (typeof resume.extractedText !== "string" || !resume.extractedText.trim()) {
-        throw createPublicError("Resume text is empty and cannot be processed.", 400);
+        throw createPublicError(
+            "Could not read text from this PDF. It may be scanned or image-only. Upload a searchable PDF or run OCR before uploading.",
+            400,
+        );
     }
 
     let result;

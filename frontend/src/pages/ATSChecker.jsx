@@ -89,17 +89,17 @@ const ATSChecker = () => {
           ? "Moderate match"
           : "Needs improvement";
 
-  const matchedSkills = Array.isArray(result?.matchedSkills)
-    ? result.matchedSkills
-    : [];
+  const matchedRequirements = Array.isArray(result?.matchedRequirements)
+    ? result.matchedRequirements
+    : Array.isArray(result?.matchedSkills)
+      ? result.matchedSkills
+      : [];
 
-  const missingSkills = Array.isArray(result?.missingSkills)
-    ? result.missingSkills
-    : [];
-
-  const keywordGaps = Array.isArray(result?.keywordGaps)
-    ? result.keywordGaps
-    : [];
+  const missingRequirements = Array.isArray(result?.missingRequirements)
+    ? result.missingRequirements
+    : Array.isArray(result?.missingSkills)
+      ? result.missingSkills
+      : [];
 
   const suggestions = Array.isArray(result?.suggestions)
     ? result.suggestions
@@ -122,8 +122,8 @@ const ATSChecker = () => {
           </h1>
 
           <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
-            Compare your resume with a job description to identify matching
-            skills, keyword gaps, and opportunities to improve your application.
+            Compare your resume with a job description to see matching and
+            missing requirements for the role.
           </p>
         </header>
 
@@ -265,30 +265,30 @@ const ATSChecker = () => {
                 <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
                   <div className="flex items-center gap-2 text-emerald-800">
                     <CheckCircle2 size={21} />
-                    <h3 className="font-semibold">Matched skills</h3>
+                    <h3 className="font-semibold">Matched requirements</h3>
                   </div>
 
                   <p className="mt-4 text-4xl font-bold text-emerald-800">
-                    {matchedSkills.length}
+                    {matchedRequirements.length}
                   </p>
 
                   <p className="mt-1 text-sm text-emerald-700">
-                    Skills matched by the analyzer
+                    Skills and keywords found in your resume
                   </p>
                 </div>
 
                 <div className="rounded-2xl border border-rose-200 bg-rose-50 p-6">
                   <div className="flex items-center gap-2 text-rose-800">
                     <XCircle size={21} />
-                    <h3 className="font-semibold">Missing skills</h3>
+                    <h3 className="font-semibold">Missing requirements</h3>
                   </div>
 
                   <p className="mt-4 text-4xl font-bold text-rose-800">
-                    {missingSkills.length}
+                    {missingRequirements.length}
                   </p>
 
                   <p className="mt-1 text-sm text-rose-700">
-                    Skills not found in the match
+                    Job requirements not found in your resume
                   </p>
                 </div>
 
@@ -335,47 +335,42 @@ const ATSChecker = () => {
                         {result.educationAnalysis?.score ?? "N/A"}
                       </p>
                     </div>
-
-                    <div>
-                      <p className="text-sm text-slate-500">Keyword gaps</p>
-                      <p className="mt-1 font-semibold">{keywordGaps.length}</p>
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Matched skills */}
+            {/* Matched requirements */}
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-semibold">Matched skills</h3>
+              <h3 className="text-lg font-semibold">Matched requirements</h3>
 
               <p className="mt-1 text-sm text-slate-500">
-                Skills identified as matching the job description.
+                Skills and relevant keywords found in your resume.
               </p>
 
               <div className="mt-4 flex flex-wrap gap-2">
-                {matchedSkills.length ? (
-                  matchedSkills.map((skill, index) => (
+                {matchedRequirements.length ? (
+                  matchedRequirements.map((requirement, index) => (
                     <span
-                      key={`${skill}-${index}`}
+                      key={`${requirement}-${index}`}
                       className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-sm text-emerald-800"
                     >
-                      {typeof skill === "string"
-                        ? skill
-                        : skill.name || JSON.stringify(skill)}
+                      {typeof requirement === "string"
+                        ? requirement
+                        : requirement.name || JSON.stringify(requirement)}
                     </span>
                   ))
                 ) : (
                   <p className="text-sm text-slate-500">
-                    No matched skills were returned.
+                    No matching requirements were identified.
                   </p>
                 )}
               </div>
             </div>
 
-            {/* Missing skills */}
+            {/* Missing requirements */}
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-semibold">Missing skills</h3>
+              <h3 className="text-lg font-semibold">Missing requirements</h3>
 
               <p className="mt-1 text-sm text-slate-500">
                 Review these against your actual experience before adding them
@@ -383,38 +378,23 @@ const ATSChecker = () => {
               </p>
 
               <div className="mt-4 flex flex-wrap gap-2">
-                {missingSkills.length ? (
-                  missingSkills.map((skill, index) => (
+                {missingRequirements.length ? (
+                  missingRequirements.map((requirement, index) => (
                     <span
-                      key={`${skill}-${index}`}
+                      key={`${requirement}-${index}`}
                       className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1.5 text-sm text-rose-800"
                     >
-                      {typeof skill === "string"
-                        ? skill
-                        : skill.name || JSON.stringify(skill)}
+                      {typeof requirement === "string"
+                        ? requirement
+                        : requirement.name || JSON.stringify(requirement)}
                     </span>
                   ))
                 ) : (
                   <p className="text-sm text-slate-500">
-                    No missing skills were returned.
+                    No missing requirements were identified.
                   </p>
                 )}
               </div>
-
-              {keywordGaps.length > 0 && (
-                <div className="mt-6 border-t border-slate-100 pt-5">
-                  <h4 className="font-medium">Keyword gaps</h4>
-                  <ul className="mt-3 list-inside list-disc space-y-2 text-sm text-slate-600">
-                    {keywordGaps.map((keyword, index) => (
-                      <li key={`${keyword}-${index}`}>
-                        {typeof keyword === "string"
-                          ? keyword
-                          : keyword.name || JSON.stringify(keyword)}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
             </div>
 
             {/* Suggestions */}

@@ -186,5 +186,260 @@
       "risk management",
       "communication"
     ]
+  },
+  {
+    "programId": "ms-nursing",
+    "program": "Master's in Nursing",
+    "field": "Nursing",
+    "description": "Advanced study in clinical practice, care coordination, evidence-based nursing, patient safety, and healthcare leadership.",
+    "duration": "Typically 1-3 years; varies by institution and study mode",
+    "eligibility": "A nursing degree and active professional registration are commonly required; prerequisites vary by program and jurisdiction.",
+    "relevantSkills": [
+      "patient care",
+      "clinical assessment",
+      "care coordination",
+      "patient safety",
+      "healthcare leadership"
+    ]
+  },
+  {
+    "programId": "mph-public-health",
+    "program": "Master of Public Health",
+    "field": "Public Health",
+    "description": "Study population health, epidemiology, health promotion, policy, biostatistics, and community-based approaches to improving health outcomes.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree is commonly required; relevant health or community experience may be preferred.",
+    "relevantSkills": [
+      "epidemiology",
+      "biostatistics",
+      "health promotion",
+      "public health policy",
+      "community health"
+    ]
+  },
+  {
+    "programId": "med-education",
+    "program": "Master of Education",
+    "field": "Education",
+    "description": "Graduate study in teaching practice, curriculum, assessment, learning theory, and educational leadership for school and adult-learning settings.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree is commonly required; teaching experience or certification may be required for some tracks.",
+    "relevantSkills": [
+      "lesson planning",
+      "curriculum design",
+      "student assessment",
+      "instructional methods",
+      "educational leadership"
+    ]
+  },
+  {
+    "programId": "med-special-education",
+    "program": "Master of Education in Special Education",
+    "field": "Special Education",
+    "description": "Study inclusive instruction, individualized learning plans, assessment, accessibility, and evidence-based support for diverse learning needs.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree is commonly required; educator credentials may be needed for licensure tracks.",
+    "relevantSkills": [
+      "individualized education plans",
+      "inclusive instruction",
+      "learning assessment",
+      "assistive technology",
+      "behavior support"
+    ]
+  },
+  {
+    "programId": "msc-counseling",
+    "program": "Master's in Counseling",
+    "field": "Counseling",
+    "description": "Graduate preparation in counseling theory, ethics, assessment, communication, and supervised practice across community or educational settings.",
+    "duration": "Typically 2-3 years; licensure requirements vary by jurisdiction",
+    "eligibility": "A bachelor's degree is generally required; supervised practice and additional requirements depend on the intended credential and location.",
+    "relevantSkills": [
+      "counseling",
+      "active listening",
+      "ethical practice",
+      "client assessment",
+      "crisis support"
+    ]
+  },
+  {
+    "programId": "msw-social-work",
+    "program": "Master of Social Work",
+    "field": "Social Work",
+    "description": "Study social work practice, case management, community services, policy, assessment, and advocacy for individuals and communities.",
+    "duration": "Typically 1-2 years; varies by prior study and institution",
+    "eligibility": "A bachelor's degree is required; advanced-standing options and field placement requirements vary.",
+    "relevantSkills": [
+      "case management",
+      "client assessment",
+      "advocacy",
+      "community services",
+      "social policy"
+    ]
+  },
+  {
+    "programId": "mha-health-administration",
+    "program": "Master of Health Administration",
+    "field": "Healthcare Administration",
+    "description": "Study healthcare operations, finance, policy, quality improvement, and leadership for hospitals, clinics, and other health organizations.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree is commonly required; healthcare experience may be preferred.",
+    "relevantSkills": [
+      "healthcare operations",
+      "health policy",
+      "quality improvement",
+      "healthcare finance",
+      "leadership"
+    ]
+  },
+  {
+    "programId": "macc-accounting",
+    "program": "Master of Accounting",
+    "field": "Accounting",
+    "description": "Advanced study in financial reporting, audit, taxation, accounting systems, and professional standards for public or private-sector roles.",
+    "duration": "Typically 1-2 years; varies by institution and prior coursework",
+    "eligibility": "A bachelor's degree is required; accounting prerequisites vary by program and licensing jurisdiction.",
+    "relevantSkills": [
+      "financial reporting",
+      "audit",
+      "taxation",
+      "accounting standards",
+      "account reconciliation"
+    ]
+  },
+  {
+    "programId": "ms-marketing",
+    "program": "Master's in Marketing",
+    "field": "Marketing",
+    "description": "Study market research, customer behavior, brand strategy, digital campaigns, marketing analytics, and integrated communications.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree is commonly required; quantitative or business prerequisites vary.",
+    "relevantSkills": [
+      "market research",
+      "brand strategy",
+      "digital marketing",
+      "customer analytics",
+      "campaign planning"
+    ]
+  },
+  {
+    "programId": "ms-supply-chain-management",
+    "program": "Master's in Supply Chain Management",
+    "field": "Supply Chain Management",
+    "description": "Study procurement, logistics, inventory, demand planning, supplier management, and resilient operations across global supply chains.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree is commonly required; quantitative preparation may be expected.",
+    "relevantSkills": [
+      "supply chain analysis",
+      "procurement",
+      "logistics",
+      "inventory management",
+      "demand planning"
+    ]
+  },
+  {
+    "programId": "ms-environmental-science",
+    "program": "Master's in Environmental Science",
+    "field": "Environmental Science",
+    "description": "Graduate study in environmental systems, field and laboratory methods, impact assessment, conservation, and environmental policy.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A relevant bachelor's degree is commonly required; science prerequisites vary by specialization.",
+    "relevantSkills": [
+      "environmental sampling",
+      "ecology",
+      "environmental regulations",
+      "GIS",
+      "field research"
+    ]
+  },
+  {
+    "programId": "ms-agriculture",
+    "program": "Master's in Agriculture and Agronomy",
+    "field": "Agriculture",
+    "description": "Study crop and soil systems, agricultural research, production methods, pest management, and sustainable food systems.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A relevant bachelor's degree is commonly required; prerequisites depend on the chosen agricultural specialization.",
+    "relevantSkills": [
+      "agronomy",
+      "soil science",
+      "crop science",
+      "field trials",
+      "sustainable agriculture"
+    ]
+  },
+  {
+    "programId": "msc-construction-management",
+    "program": "Master's in Construction Management",
+    "field": "Construction Management",
+    "description": "Study construction planning, cost control, contracts, site operations, scheduling, quality, and safety across building and infrastructure projects.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree is commonly required; construction or engineering preparation may be expected.",
+    "relevantSkills": [
+      "construction management",
+      "project scheduling",
+      "cost control",
+      "building codes",
+      "site safety"
+    ]
+  },
+  {
+    "programId": "ms-hospitality-management",
+    "program": "Master's in Hospitality Management",
+    "field": "Hospitality",
+    "description": "Study hotel and tourism operations, guest experience, service management, revenue, event planning, and hospitality leadership.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree is commonly required; hospitality experience may be preferred.",
+    "relevantSkills": [
+      "hospitality operations",
+      "guest services",
+      "event management",
+      "revenue management",
+      "service recovery"
+    ]
+  },
+  {
+    "programId": "mpp-public-policy",
+    "program": "Master of Public Policy",
+    "field": "Public Policy",
+    "description": "Study policy analysis, economics, research methods, program evaluation, and evidence-based decision making for public and nonprofit organizations.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree is commonly required; quantitative preparation may be recommended.",
+    "relevantSkills": [
+      "policy research",
+      "program evaluation",
+      "data analysis",
+      "legislative analysis",
+      "brief writing"
+    ]
+  },
+  {
+    "programId": "mpa-public-administration",
+    "program": "Master of Public Administration",
+    "field": "Public Administration",
+    "description": "Prepare for public and nonprofit leadership through study of public finance, organizational management, policy implementation, and service delivery.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree is commonly required; relevant public or nonprofit experience may be preferred.",
+    "relevantSkills": [
+      "public administration",
+      "public finance",
+      "program management",
+      "policy implementation",
+      "community engagement"
+    ]
+  },
+  {
+    "programId": "jd-law",
+    "program": "Juris Doctor or Graduate Law Degree",
+    "field": "Law",
+    "description": "Graduate legal study in legal reasoning, research, writing, procedure, and substantive law; program titles, duration, and professional qualification depend on jurisdiction.",
+    "duration": "Varies by jurisdiction and program structure",
+    "eligibility": "A prior degree and admission requirements vary by country and institution; completing a program does not itself guarantee licensure.",
+    "relevantSkills": [
+      "legal research",
+      "legal writing",
+      "case analysis",
+      "contract review",
+      "legal procedure"
+    ]
   }
 ]

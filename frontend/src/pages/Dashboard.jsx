@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import { useAuth } from "../context/useAuth";
+import ResumePreview from "../builder/ResumePreview";
 
 const featureCards = [
   {
@@ -115,6 +116,70 @@ const accentStyles = {
   },
 };
 
+const resumeSample = {
+  fullName: "Alex Morgan",
+  email: "alex.morgan@example.com",
+  phone: "(555) 010-2048",
+  location: "Chicago, IL",
+  summary:
+    "Project coordinator focused on improving customer experiences and helping cross-functional teams deliver clear, measurable outcomes.",
+  skills:
+    "Project Coordination, Customer Research, Reporting, Stakeholder Communication, Process Improvement",
+  education: [
+    {
+      institution: "Example State University",
+      degree: "B.A.",
+      fieldOfStudy: "Business Administration",
+      startDate: "2017-09",
+      endDate: "2021-05",
+    },
+  ],
+  workExperience: [
+    {
+      position: "Project Coordinator",
+      company: "Northstar Services",
+      location: "Chicago, IL",
+      startDate: "2022-03",
+      endDate: "Present",
+      description:
+        "Coordinated customer onboarding projects and improved handoffs between support, operations, and product teams.",
+    },
+  ],
+  projects: [
+    {
+      name: "Customer Onboarding Review",
+      technologies: "Survey design, Reporting",
+      description:
+        "Collected customer feedback and presented recommendations for a simpler onboarding process.",
+    },
+  ],
+  certifications: [
+    {
+      name: "Project Coordination Certificate",
+      issuer: "Example Institute",
+      date: "2023",
+    },
+  ],
+};
+
+const resumeFormats = [
+  {
+    template: "professional",
+    name: "Professional",
+    description: "A balanced, traditional layout for a wide range of roles.",
+  },
+  {
+    template: "modern",
+    name: "Modern",
+    description: "A contemporary layout with clear visual section accents.",
+  },
+  {
+    template: "executive",
+    name: "Executive",
+    description: "A refined, typography-led layout for experienced candidates.",
+  },
+];
+
 const Dashboard = () => {
   const { user } = useAuth();
 
@@ -186,6 +251,66 @@ const Dashboard = () => {
             );
           })}
         </nav>
+
+        <section className="mt-10" aria-labelledby="resume-samples-heading">
+          <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2
+                id="resume-samples-heading"
+                className="text-xl font-semibold tracking-tight text-slate-900"
+              >
+                Resume format samples
+              </h2>
+              <p className="mt-1 text-sm text-slate-500">
+                Preview all three layouts with example information.
+              </p>
+            </div>
+            <Link
+              to="/builder"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 no-underline hover:text-indigo-700"
+            >
+              Open builder <ArrowRight className="size-4" />
+            </Link>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {resumeFormats.map((format) => (
+              <article
+                key={format.template}
+                className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
+              >
+                <div className="px-4 pb-3 pt-4">
+                  <h3 className="font-semibold text-slate-900">
+                    {format.name}
+                  </h3>
+                  <p className="mt-1 min-h-10 text-sm leading-5 text-slate-500">
+                    {format.description}
+                  </p>
+                </div>
+                <div className="relative h-[360px] overflow-hidden bg-slate-100">
+                  <div
+                    className="absolute left-1/2 top-0 w-[210mm] origin-top"
+                    style={{ transform: "translateX(-50%) scale(0.32)" }}
+                  >
+                    <ResumePreview
+                      resume={resumeSample}
+                      template={format.template}
+                    />
+                  </div>
+                </div>
+                <div className="border-t border-slate-100 px-4 py-3">
+                  <Link
+                    to="/builder"
+                    state={{ template: format.template }}
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 no-underline hover:text-indigo-700"
+                  >
+                    Use this format <ArrowRight className="size-4" />
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
 
         {/* ── Empty tip ───────────────────────────────── */}
         <div className="mt-8 rounded-xl border border-dashed border-slate-200 bg-slate-50/60 px-5 py-4 sm:mt-10">
