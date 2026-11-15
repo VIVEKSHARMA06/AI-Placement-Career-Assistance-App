@@ -212,10 +212,7 @@ const EducationRecommendations = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const loadRecommendations = async () => {
-    setLoading(true);
-    setError("");
-
+  const requestRecommendations = async () => {
     try {
       const resumeResponse = await getResume();
       const savedResume = resumeResponse?.data?.resume;
@@ -254,8 +251,14 @@ const EducationRecommendations = () => {
     }
   };
 
+  const loadRecommendations = async () => {
+    setLoading(true);
+    setError("");
+    await requestRecommendations();
+  };
+
   useEffect(() => {
-    loadRecommendations();
+    void Promise.resolve().then(requestRecommendations);
   }, []);
 
   return (

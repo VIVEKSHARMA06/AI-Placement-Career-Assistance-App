@@ -88,7 +88,7 @@ const predictCandidateSuitability = async (req, res) => {
             candidateProfile,
         });
 
-        const result = pythonResponse?.data;
+        const result = pythonResponse;
 
         if (
             !result ||

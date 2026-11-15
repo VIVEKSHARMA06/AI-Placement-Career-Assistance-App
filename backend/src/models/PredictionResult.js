@@ -39,7 +39,13 @@ const predictionResultSchema = new mongoose.Schema(
         predictionLabel: {
             type: String,
             required: [true, "Prediction label is required"],
-            enum: ["Hire", "No Hire"],
+            enum: [
+                "Hire",
+                "No Hire",
+                "Strong match-score estimate",
+                "Moderate match-score estimate",
+                "Low match-score estimate",
+            ],
         },
 
         limeExplanation: {

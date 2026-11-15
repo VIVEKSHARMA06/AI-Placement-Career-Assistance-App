@@ -1,4 +1,3 @@
-import RecommendationCard from "../components/RecommendationCard";
 const RecommendationCard = ({
   title,
   subtitle,

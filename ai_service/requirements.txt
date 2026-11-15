@@ -7,3 +7,5 @@ google-genai
 sentence-transformers
 numpy
 scikit-learn
+lime
+pypdf

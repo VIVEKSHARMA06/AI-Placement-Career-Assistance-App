@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const config = require("./src/config/env");
 const Resume = require("./src/models/Resume");
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = `http://localhost:${config.PORT}`;
 
 async function runE2E() {
     console.log("=== STARTING END-TO-END PIPELINE VERIFICATION ===");

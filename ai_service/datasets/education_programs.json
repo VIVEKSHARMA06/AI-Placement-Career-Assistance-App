@@ -1,0 +1,190 @@
+[
+  {
+    "programId": "ms-computer-science",
+    "program": "Master's in Computer Science",
+    "field": "Computer Science",
+    "description": "Graduate study in algorithms, software systems, databases, and advanced computing, suitable for building deeper technical specialization.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A relevant bachelor's degree or equivalent preparation; prerequisites vary by institution.",
+    "relevantSkills": [
+      "programming",
+      "algorithms",
+      "software engineering",
+      "databases"
+    ]
+  },
+  {
+    "programId": "ms-data-science",
+    "program": "Master's in Data Science",
+    "field": "Data Science",
+    "description": "Graduate study in statistical analysis, machine learning, data engineering, and communicating evidence-based findings.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A relevant bachelor's degree; quantitative and programming prerequisites vary by institution.",
+    "relevantSkills": [
+      "Python",
+      "statistics",
+      "SQL",
+      "machine learning",
+      "data visualization"
+    ]
+  },
+  {
+    "programId": "ms-artificial-intelligence",
+    "program": "Master's in Artificial Intelligence",
+    "field": "Artificial Intelligence",
+    "description": "Advanced study of machine learning, intelligent systems, data-driven modeling, and responsible AI applications.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A relevant bachelor's degree with appropriate mathematics and computing preparation.",
+    "relevantSkills": [
+      "Python",
+      "machine learning",
+      "deep learning",
+      "statistics",
+      "data science"
+    ]
+  },
+  {
+    "programId": "ms-cybersecurity",
+    "program": "Master's in Cybersecurity",
+    "field": "Cybersecurity",
+    "description": "Graduate study in security engineering, risk management, digital forensics, and protecting organizational systems.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A relevant bachelor's degree or equivalent IT experience; requirements vary by institution.",
+    "relevantSkills": [
+      "networking",
+      "security",
+      "risk management",
+      "Linux",
+      "incident response"
+    ]
+  },
+  {
+    "programId": "ms-software-engineering",
+    "program": "Master's in Software Engineering",
+    "field": "Software Engineering",
+    "description": "Graduate study in software architecture, quality engineering, distributed systems, and managing software delivery.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree in computing or a related field; prerequisites vary by institution.",
+    "relevantSkills": [
+      "software development",
+      "testing",
+      "architecture",
+      "Agile",
+      "cloud"
+    ]
+  },
+  {
+    "programId": "graduate-certificate-cloud",
+    "program": "Graduate Certificate in Cloud Computing",
+    "field": "Cloud Computing",
+    "description": "Focused postgraduate study in cloud architecture, deployment, infrastructure automation, and operational practices.",
+    "duration": "Typically 6-12 months; varies by institution",
+    "eligibility": "Prior technical education or experience is commonly expected; requirements vary by institution.",
+    "relevantSkills": ["cloud", "AWS", "Azure", "DevOps", "networking"]
+  },
+  {
+    "programId": "ms-information-systems",
+    "program": "Master's in Information Systems",
+    "field": "Information Systems",
+    "description": "Study connecting technology, data, and organizational needs, including systems analysis and technology management.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree; technical or business prerequisites vary by institution.",
+    "relevantSkills": [
+      "systems analysis",
+      "SQL",
+      "project management",
+      "business analysis",
+      "IT"
+    ]
+  },
+  {
+    "programId": "ms-business-analytics",
+    "program": "Master's in Business Analytics",
+    "field": "Business Analytics",
+    "description": "Graduate study applying statistics, data tools, and business knowledge to operational and strategic decisions.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree; quantitative preparation requirements vary by institution.",
+    "relevantSkills": [
+      "analytics",
+      "Excel",
+      "SQL",
+      "statistics",
+      "business strategy"
+    ]
+  },
+  {
+    "programId": "mba",
+    "program": "Master of Business Administration",
+    "field": "Business Administration",
+    "description": "Broad graduate study in management, finance, marketing, operations, leadership, and organizational strategy.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree; work experience and other requirements vary by institution.",
+    "relevantSkills": [
+      "leadership",
+      "management",
+      "finance",
+      "marketing",
+      "strategy"
+    ]
+  },
+  {
+    "programId": "ms-human-resource-management",
+    "program": "Master's in Human Resource Management",
+    "field": "Human Resources",
+    "description": "Graduate study in talent management, employee relations, workforce planning, and people operations.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree; requirements vary by institution.",
+    "relevantSkills": [
+      "human resources",
+      "recruiting",
+      "employee relations",
+      "training",
+      "workforce planning"
+    ]
+  },
+  {
+    "programId": "graduate-certificate-digital-marketing",
+    "program": "Graduate Certificate in Digital Marketing",
+    "field": "Marketing",
+    "description": "Focused postgraduate study in digital campaigns, audience analytics, content strategy, and marketing measurement.",
+    "duration": "Typically 6-12 months; varies by institution",
+    "eligibility": "A bachelor's degree or relevant professional background; requirements vary by institution.",
+    "relevantSkills": [
+      "marketing",
+      "content strategy",
+      "analytics",
+      "SEO",
+      "campaign management"
+    ]
+  },
+  {
+    "programId": "ms-finance",
+    "program": "Master's in Finance",
+    "field": "Finance",
+    "description": "Graduate study in financial analysis, corporate finance, investment principles, and risk assessment.",
+    "duration": "Typically 1-2 years; varies by institution",
+    "eligibility": "A bachelor's degree; quantitative prerequisites vary by institution.",
+    "relevantSkills": [
+      "financial analysis",
+      "accounting",
+      "Excel",
+      "risk management",
+      "economics"
+    ]
+  },
+  {
+    "programId": "graduate-certificate-project-management",
+    "program": "Graduate Certificate in Project Management",
+    "field": "Project Management",
+    "description": "Focused postgraduate study in project planning, delivery, stakeholder communication, and risk management.",
+    "duration": "Typically 6-12 months; varies by institution",
+    "eligibility": "A bachelor's degree or relevant professional background; requirements vary by institution.",
+    "relevantSkills": [
+      "project management",
+      "Agile",
+      "leadership",
+      "risk management",
+      "communication"
+    ]
+  }
+]

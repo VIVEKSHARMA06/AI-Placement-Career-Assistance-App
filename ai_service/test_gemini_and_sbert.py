@@ -39,10 +39,8 @@ class GeminiExtractionUnitTests(unittest.TestCase):
 
     def test_missing_api_key_raises_not_configured(self):
         with patch("app.services.gemini_service.settings.gemini_api_key", None):
-            with patch("app.services.gemini_service._get_gemini_client") as mock_client:
-                mock_client.side_effect = GeminiNotConfiguredError("Not configured")
-                with self.assertRaises(GeminiNotConfiguredError):
-                    extract_candidate_profile("Valid English resume text here.")
+            with self.assertRaises(GeminiNotConfiguredError):
+                extract_candidate_profile("Valid English resume text here.")
 
     def test_successful_structured_extraction(self):
         sample_json = {
@@ -90,21 +88,23 @@ class GeminiExtractionUnitTests(unittest.TestCase):
         }
 
         mock_client = MagicMock()
+        mock_client.__enter__.return_value = mock_client
         mock_response = MagicMock()
         mock_response.text = json.dumps(sample_json)
         mock_client.models.generate_content.return_value = mock_response
 
-        with patch("app.services.gemini_service._get_gemini_client", return_value=mock_client):
-            profile = extract_candidate_profile("Sample resume text for Jane Doe.")
+        with patch("app.services.gemini_service.settings.gemini_api_key", "test-key"):
+            with patch("app.services.gemini_service.genai.Client", return_value=mock_client):
+                profile = extract_candidate_profile("Sample resume text for Jane Doe.")
 
-            self.assertIsInstance(profile, CandidateProfile)
-            self.assertEqual(profile.personalInfo.name, "Jane Doe")
-            self.assertEqual(profile.personalInfo.email, "jane@example.com")
-            self.assertEqual(len(profile.skills), 5)
-            self.assertEqual(profile.education[0].institution, "MIT")
-            self.assertEqual(profile.experience[0].role, "Senior Engineer")
-            self.assertEqual(profile.projects[0].title, "Career Portal")
-            self.assertEqual(profile.certifications, ["AWS Solutions Architect"])
+        self.assertIsInstance(profile, CandidateProfile)
+        self.assertEqual(profile.personalInfo.name, "Jane Doe")
+        self.assertEqual(profile.personalInfo.email, "jane@example.com")
+        self.assertEqual(len(profile.skills), 5)
+        self.assertEqual(profile.education[0].institution, "MIT")
+        self.assertEqual(profile.experience[0].role, "Senior Engineer")
+        self.assertEqual(profile.projects[0].title, "Career Portal")
+        self.assertEqual(profile.certifications, ["AWS Solutions Architect"])
 
     def test_incomplete_minimal_resume_handles_nulls(self):
         minimal_json = {
@@ -119,16 +119,19 @@ class GeminiExtractionUnitTests(unittest.TestCase):
         }
 
         mock_client = MagicMock()
+        mock_client.__enter__.return_value = mock_client
         mock_response = MagicMock()
         mock_response.text = json.dumps(minimal_json)
         mock_client.models.generate_content.return_value = mock_response
 
-        with patch("app.services.gemini_service._get_gemini_client", return_value=mock_client):
-            profile = extract_candidate_profile("Minimal text: Bob, Python.")
-            self.assertEqual(profile.personalInfo.name, "Bob")
-            self.assertIsNone(profile.personalInfo.email)
-            self.assertEqual(profile.skills, ["Python"])
-            self.assertEqual(profile.education, [])
+        with patch("app.services.gemini_service.settings.gemini_api_key", "test-key"):
+            with patch("app.services.gemini_service.genai.Client", return_value=mock_client):
+                profile = extract_candidate_profile("Minimal text: Bob, Python.")
+
+        self.assertEqual(profile.personalInfo.name, "Bob")
+        self.assertIsNone(profile.personalInfo.email)
+        self.assertEqual(profile.skills, ["Python"])
+        self.assertEqual(profile.education, [])
 
 
 class SbertCoreUnitTests(unittest.TestCase):

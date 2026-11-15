@@ -1,9 +1,9 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 import api from "../services/api";
 import { loginUser, registerUser } from "../services/authService";
+import { AuthContext } from "./auth-context";
 
-const AuthContext = createContext(null);
 const STORAGE_KEY = "placement-assistant-auth-session";
 
 const setAuthorizationToken = (token) => {
@@ -21,6 +21,32 @@ const isValidSession = (session) =>
   typeof session.user?.fullName === "string" &&
   typeof session.user?.email === "string";
 
+const readStoredSession = () => {
+  try {
+    const storedSession = window.localStorage.getItem(STORAGE_KEY);
+
+    if (!storedSession) {
+      return null;
+    }
+
+    const session = JSON.parse(storedSession);
+
+    if (isValidSession(session)) {
+      return { token: session.token, user: session.user };
+    }
+
+    window.localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    try {
+      window.localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // Storage can be unavailable in restricted browser contexts.
+    }
+  }
+
+  return null;
+};
+
 const getAuthSession = (response) => {
   const session = response?.data;
 
@@ -32,37 +58,14 @@ const getAuthSession = (response) => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [session, setSession] = useState(readStoredSession);
+  const [loading, setLoading] = useState(false);
+  const user = session?.user ?? null;
+  const token = session?.token ?? null;
 
-  useEffect(() => {
-    setAuthorizationToken(null);
-
-    try {
-      const storedSession = window.localStorage.getItem(STORAGE_KEY);
-
-      if (storedSession) {
-        const session = JSON.parse(storedSession);
-
-        if (isValidSession(session)) {
-          setUser(session.user);
-          setToken(session.token);
-          setAuthorizationToken(session.token);
-        } else {
-          window.localStorage.removeItem(STORAGE_KEY);
-        }
-      }
-    } catch {
-      try {
-        window.localStorage.removeItem(STORAGE_KEY);
-      } catch {
-        // Storage can be unavailable in restricted browser contexts.
-      }
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  useLayoutEffect(() => {
+    setAuthorizationToken(token);
+  }, [token]);
 
   useEffect(() => {
     const interceptorId = api.interceptors.response.use(
@@ -80,8 +83,7 @@ export const AuthProvider = ({ children }) => {
             // Clear in-memory authentication if storage is unavailable.
           }
 
-          setUser(null);
-          setToken(null);
+          setSession(null);
           setAuthorizationToken(null);
         }
 
@@ -94,8 +96,7 @@ export const AuthProvider = ({ children }) => {
 
   const saveSession = (session) => {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
-    setToken(session.token);
-    setUser(session.user);
+    setSession(session);
     setAuthorizationToken(session.token);
     return session.user;
   };
@@ -129,8 +130,7 @@ export const AuthProvider = ({ children }) => {
       // Clear in-memory authentication even if browser storage is unavailable.
     }
 
-    setUser(null);
-    setToken(null);
+    setSession(null);
     setAuthorizationToken(null);
   };
 
@@ -145,14 +145,4 @@ export const AuthProvider = ({ children }) => {
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider.");
-  }
-
-  return context;
 };
